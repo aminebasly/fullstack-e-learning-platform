@@ -1,0 +1,186 @@
+/* ✅ 1. Angular Material setup */
+@use '@angular/material' as mat;
+
+/* ✅ 2. Angular Material core */
+@include mat.core();
+
+/* ✅ 3. Color palettes */
+$primary-palette: mat.define-palette(mat.$deep-purple-palette, 600, 300, 900);
+$accent-palette: mat.define-palette(mat.$orange-palette, 600, 300, 800);
+$warn-palette: mat.define-palette(mat.$red-palette, 700, 400, 900);
+$success-palette: mat.define-palette(mat.$green-palette, 600, 300, 800);
+$warning-palette: mat.define-palette(mat.$amber-palette);
+
+/* ✅ 4. Typography config */
+$typography-config: mat.define-typography-config(
+  $font-family: '"Inter", Roboto, "Helvetica Neue", Arial, sans-serif',
+  $display-1: mat.define-typography-level(3.5rem, 4rem, 700),
+  $display-2: mat.define-typography-level(2.75rem, 3.25rem, 700),
+  $headline: mat.define-typography-level(2rem, 2.5rem, 600),
+  $title: mat.define-typography-level(1.5rem, 2rem, 600),
+  $subheading-2: mat.define-typography-level(1.25rem, 1.75rem, 500),
+  $subheading-1: mat.define-typography-level(1.1rem, 1.5rem, 500),
+  $body-1: mat.define-typography-level(1rem, 1.5rem, 400),
+  $body-2: mat.define-typography-level(0.9rem, 1.4rem, 400),
+  $caption: mat.define-typography-level(0.85rem, 1.2rem, 400),
+  $button: mat.define-typography-level(0.95rem, 1.2rem, 600)
+);
+
+/* ✅ 5. Font reuse */
+$global-font-family: '"Inter", Roboto, "Helvetica Neue", Arial, sans-serif';
+
+/* ✅ 6. Theme definition */
+$my-app-theme: mat.define-light-theme((
+  color: (
+    primary: $primary-palette,
+    accent: $accent-palette,
+    warn: $warn-palette
+  ),
+  typography: $typography-config,
+  density: 0
+));
+
+@include mat.all-component-themes($my-app-theme);
+
+/* ✅ 7. Mixin for smooth transitions */
+@mixin smooth-motion($duration: 0.3s) {
+  transition: background-color $duration ease, transform 0.2s ease, box-shadow $duration ease;
+}
+
+/* ✅ 8. Buttons */
+.mat-button, .mat-raised-button, .mat-icon-button, .mat-stroked-button, .btn-primary {
+  border-radius: 10px;
+  font-weight: 600;
+  letter-spacing: 0.4px;
+  @include smooth-motion();
+}
+
+.mat-button:hover, .mat-raised-button:hover, .btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.15);
+}
+
+.mat-button:focus, .mat-raised-button:focus, .btn-primary:focus {
+  outline: 3px solid mat.get-color-from-palette($primary-palette, 300);
+  outline-offset: 3px;
+  box-shadow: 0 0 0 4px rgba(mat.get-color-from-palette($primary-palette, 300), 0.3);
+}
+
+/* ✅ 9. Cards */
+.card {
+  background-color: #ffffff;
+  border-radius: 16px;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+  padding: 1.25rem;
+  border: 1px solid #E5E7EB;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.15);
+}
+
+/* ✅ 10. Snackbar styles */
+.success-snackbar, .error-snackbar, .warning-snackbar {
+  min-width: 300px;
+  max-width: 90vw;
+  padding: 1rem 1.5rem;
+  font-size: 0.95rem;
+  font-weight: 600;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.25);
+}
+
+.confirm-snackbar {
+  background-color: mat.get-color-from-palette($warning-palette, 300); // yellow
+  color: #333333;
+  font-weight: 600;
+  border-radius: 12px;
+  padding: 1.5rem 2.25rem;
+  min-width: 400px;
+  max-width: 98vw;
+  font-size: 1.15rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  box-shadow: 0 8px 28px rgba(0, 0, 0, 0.18);
+}
+
+
+.success-snackbar {
+  background-color: mat.get-color-from-palette($success-palette, 600);
+  color: #ffffff;
+}
+
+.error-snackbar {
+  background-color: mat.get-color-from-palette($warn-palette, 700);
+  color: #ffffff;
+}
+
+.warning-snackbar {
+  background-color: mat.get-color-from-palette($warning-palette, 300);
+  color: #000000;
+}
+
+/* ✅ 11. Snackbar animation */
+::ng-deep .mat-snack-bar-container {
+  animation: slide-in 300ms ease-out;
+}
+@keyframes slide-in {
+  from { transform: translateY(20px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+
+/* ✅ 12. Global layout */
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  font-family: $global-font-family;
+  color: #1F2937;
+  background-color: #F9FAFB;
+  font-size: clamp(14px, 1.2vw, 16px);
+  scroll-behavior: smooth;
+}
+
+.container {
+  max-width: 1024px;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+}
+
+/* ✅ 13. Status indicators */
+.status-completed {
+  color: mat.get-color-from-palette($success-palette, 600);
+}
+.status-in-progress {
+  color: mat.get-color-from-palette($accent-palette, 600);
+}
+.status-not-started {
+  color: mat.get-color-from-palette($warn-palette, 700);
+}
+
+/* ✅ 14. Responsive adjustments */
+@media (max-width: 768px) {
+  .container { padding: 0 1rem; }
+}
+@media (max-width: 480px) {
+  .container { padding: 0 0.75rem; }
+  .success-snackbar, .error-snackbar {
+    padding: 0.75rem 1rem;
+    font-size: 0.9rem;
+  }
+}
+
+/* ✅ 15. Accessibility */
+:focus-visible {
+  outline: 3px solid mat.get-color-from-palette($primary-palette, 300);
+  outline-offset: 3px;
+  box-shadow: 0 0 0 4px rgba(mat.get-color-from-palette($primary-palette, 300), 0.3);
+}
+
+/* ✅ 16. External styles */
+@import '~quill/dist/quill.snow.css';

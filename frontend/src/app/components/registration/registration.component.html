@@ -1,0 +1,275 @@
+<div class="wrapper">
+  <div class="container">
+      <div class="header">
+          <img src="/assets/img/English-Star.jpg" alt="English Star Logo" class="logo">
+          <span class="brand-name">English Star</span>
+      </div>
+
+      <ul class="nav nav-tabs nav-justified" id="myTab" role="tablist">
+          <li class="nav-item">
+              <a class="nav-link nav1" [ngClass]="{'active': activeTab === 'user'}" (click)="setActiveTab('user')" id="home-tab">User</a>
+          </li>
+          <li class="nav-item">
+              <a class="nav-link nav2" [ngClass]="{'active': activeTab === 'professor'}" (click)="setActiveTab('professor')" id="profile-tab">Professor</a>
+          </li>
+      </ul>
+
+      <div class="tab-content" id="myTabContent">
+          <div class="tab-pane" [ngClass]="{'active': activeTab === 'user', 'show': activeTab === 'user'}" id="home">
+              <h2 class="textual">User Registration</h2>
+              <form #userform="ngForm" (ngSubmit)="registerUser()">
+                  <small class="text-danger"><b>{{msg}}</b></small>
+                  <div class="row">
+                      <div class="col-md-6">
+                          <div class="form-group">
+    <label>User Name: <b class="text-danger">*</b></label>
+    <input type="text" class="form-control" placeholder="Enter user name" name="username" [(ngModel)]="user.username" required #username="ngModel" [class.is-invalid]="username.invalid && username.touched" pattern=".{5,15}">
+    <small class="text-danger" [class.d-none]="username.valid || username.untouched"><b>Required field</b></small>
+    <small class="text-danger" *ngIf="username.errors?.pattern && username.touched"><b>Username must be between 5 and 15 characters.</b></small>
+</div>
+                          <div class="form-group">
+                            <label class="form-label fw-medium">Gender <span class="text-danger">*</span></label>
+                            <div class="d-flex gap-3 mb-3">
+                              <div class="form-check">
+                                <input class="form-check-input" type="radio" name="gender" id="male" value="Male" [(ngModel)]="user.gender" required #gender="ngModel" [class.is-invalid]="gender.invalid && gender.touched">
+                                <label class="form-check-label" for="male">Male</label>
+                              </div>
+                              <div class="form-check">
+                                <input class="form-check-input" type="radio" name="gender" id="female" value="Female" [(ngModel)]="user.gender" required>
+                                <label class="form-check-label" for="female">Female</label>
+                              </div>
+                            </div>
+                            <small class="text-danger" *ngIf="gender.invalid && gender.touched">Please select a gender</small>
+                          </div>
+                          
+                          <div class="form-group">
+                              <label>Profession: <b class="text-danger">*</b></label>
+                              <select class="form-control" name="profession" [(ngModel)]="user.profession" required #profession="ngModel" [class.is-invalid]="profession.invalid && profession.touched">
+                                  <option value="" disabled selected>Select Profession</option>
+                                  <option value="Student">Student</option>
+                                  <option value="Engineer">Engineer</option>
+                                  <option value="Doctor">Doctor</option>
+                                  <option value="Other">Other</option>
+                              </select>
+                              <small class="text-danger" *ngIf="profession.invalid && profession.touched"><b>Please select a profession</b></small>
+                          </div>
+                          <div class="form-group">
+                            <label>Password: <b class="text-danger">*</b></label>
+                            <div class="input-group">
+                              <input [type]="showUserPassword ? 'text' : 'password'" 
+                                     class="form-control" 
+                                     placeholder="Enter password" 
+                                     name="pwd" 
+                                     [(ngModel)]="user.password" 
+                                     required 
+                                     #userpassword="ngModel" 
+                                     [class.is-invalid]="userpassword.invalid && userpassword.touched" 
+                                     pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,20}$">
+                              <div class="input-group-append">
+                                <button type="button" class="btn btn-outline-secondary" (click)="showUserPassword = !showUserPassword">
+                                  <i class="fas" [ngClass]="showUserPassword ? 'fa-eye-slash' : 'fa-eye'"></i>
+                                </button>
+                              </div>
+                            </div>
+                            <div *ngIf="userpassword.invalid && userpassword.touched">
+                                <small class="text-danger" *ngIf="userpassword.errors?.required">
+                                  <b>Required field</b>
+                                </small>
+                                <small class="text-danger" *ngIf="userpassword.errors?.pattern">
+                                  <b>Password must contain at least one uppercase letter, one lowercase letter, one number, and be between 8 and 20 characters long.</b>
+                                </small>
+                              </div>
+                            
+                          </div>
+                      </div>
+                      <div class="col-md-6">
+                          <div class="form-group">
+                              <label>Email Address: <b class="text-danger">*</b></label>
+                              <input type="email" class="form-control" placeholder="Enter email" name="useremail" [(ngModel)]="user.email" required pattern="^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+$" #useremail="ngModel" [class.is-invalid]="useremail.invalid && useremail.touched">
+                              <div *ngIf="useremail.errors && (useremail.invalid && useremail.touched)">
+                                  <small class="text-danger" *ngIf="useremail.errors.required"><b>Required field</b></small>
+                                  <small class="text-danger" *ngIf="useremail.errors.pattern"><b>Invalid email</b></small>
+                              </div>
+                          </div>
+                         <div class="form-group">
+  <label>Mobile: <b class="text-danger">*</b></label>
+  <input type="tel"
+        
+         class="form-control"
+         placeholder="Enter mobile"
+         name="usermobile"
+         [(ngModel)]="user.mobile"
+         required
+         #usermobile="ngModel"
+         [class.is-invalid]="usermobile.invalid && usermobile.touched"
+         pattern="^\+?\d+$"
+         (input)="filterMobileInput($event)">
+  <small class="text-danger"
+         [class.d-none]="usermobile.valid || usermobile.untouched">
+    <b>Required field</b>
+  </small>
+</div>
+
+                          <div class="form-group">
+                              <label>Address: <b class="text-danger">*</b></label>
+                              <input type="text" class="form-control" placeholder="Enter address" name="useraddress" [(ngModel)]="user.address" required #useraddress="ngModel" [class.is-invalid]="useraddress.invalid && useraddress.touched">
+                              <small class="text-danger" [class.d-none]="useraddress.valid || useraddress.untouched"><b>Required field</b></small>
+                          </div>
+                          <div class="form-group">
+                            <label>Confirm Password: <b class="text-danger">*</b></label>
+                            <div class="input-group">
+                              <input [type]="showUserConfirmPassword ? 'text' : 'password'" 
+                                     class="form-control" 
+                                     placeholder="Confirm password" 
+                                     name="ConfirmPassword" 
+                                     [(ngModel)]="user.confirmPassword" 
+                                     required 
+                                     #userconfirmPassword="ngModel" 
+                                     [class.is-invalid]="userconfirmPassword.invalid && userconfirmPassword.touched">
+                              <div class="input-group-append">
+                                <button type="button" class="btn btn-outline-secondary" (click)="showUserConfirmPassword = !showUserConfirmPassword">
+                                  <i class="fas" [ngClass]="showUserConfirmPassword ? 'fa-eye-slash' : 'fa-eye'"></i>
+                                </button>
+                              </div>
+                            </div>
+                            <small class="text-danger" [class.d-none]="(userconfirmPassword.value === userpassword.value) || userconfirmPassword.untouched"><b>Passwords do not match</b></small>
+                          </div>
+                          
+                      </div>
+                  </div>
+                 
+                  <button [disabled]="userform.form.invalid" type="submit" class="btn registerbtn">Register</button>
+                  <div class="sign-up">Already have an account? <a [routerLink]="['/login']" class="signup-link"><b>Login here</b></a></div>
+              </form>
+          </div>
+
+          <div class="tab-pane" [ngClass]="{'active': activeTab === 'professor', 'show': activeTab === 'professor'}" id="profile">
+              <h2 class="textual">Professor Registration</h2>
+              <form #professorform="ngForm" (ngSubmit)="registerProfessor()">
+                  <small class="text-danger"><b>{{msg}}</b></small>
+                  <div class="row">
+                      <div class="col-md-6">
+                          <div class="form-group">
+                              <label>Professor Name: <b class="text-danger">*</b></label>
+                              <input type="text" class="form-control" placeholder="Enter professor name" name="professorname" [(ngModel)]="professor.professorname" required #professorname="ngModel" [class.is-invalid]="professorname.invalid && professorname.touched">
+                              <small class="text-danger" [class.d-none]="professorname.valid || professorname.untouched"><b>Required field</b></small>
+                          </div>
+                          <div class="form-group">
+                              <label>Email Address: <b class="text-danger">*</b></label>
+                              <input type="email" class="form-control" placeholder="Enter email" name="professoremail" [(ngModel)]="professor.email" required pattern="^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+$" #professoremail="ngModel" [class.is-invalid]="professoremail.invalid && professoremail.touched">
+                              <div *ngIf="professoremail.errors && (professoremail.invalid && professoremail.touched)">
+                                  <small class="text-danger" *ngIf="professoremail.errors.required"><b>Required field</b></small>
+                                  <small class="text-danger" *ngIf="professoremail.errors.pattern"><b>Invalid email</b></small>
+                              </div>
+                          </div>
+                          <div class="form-group">
+                            <label class="form-label fw-medium">Gender <span class="text-danger">*</span></label>
+                            <div class="d-flex gap-3 mb-3">
+                              <div class="form-check">
+                                <input class="form-check-input" type="radio" name="professorgender" id="professormale" value="Male" [(ngModel)]="professor.gender" required #professorgender="ngModel" [class.is-invalid]="professorgender.invalid && professorgender.touched">
+                                <label class="form-check-label" for="professormale">Male</label>
+                              </div>
+                              <div class="form-check">
+                                <input class="form-check-input" type="radio" name="professorgender" id="professorfemale" value="Female" [(ngModel)]="professor.gender" required>
+                                <label class="form-check-label" for="professorfemale">Female</label>
+                              </div>
+                            </div>
+                            <small class="text-danger" *ngIf="professorgender.invalid && professorgender.touched"><b>Please select a gender</b></small>
+                          </div>
+                          <div class="form-group">
+  <label>Mobile: <b class="text-danger">*</b></label>
+  <input type="tel"
+         maxlength="10"
+         minlength="10"
+         class="form-control"
+         placeholder="Enter mobile"
+         name="professormobile"
+         [(ngModel)]="professor.mobile"
+         required
+         #professormobile="ngModel"
+         [class.is-invalid]="professormobile.invalid && professormobile.touched"
+         (input)="filterProfessorMobileInput($event)">
+  <small class="text-danger"
+         [class.d-none]="professormobile.valid || professormobile.untouched">
+    <b>Required field</b>
+  </small>
+</div>
+
+                          <div class="form-group">
+                            <label>Password: <b class="text-danger">*</b></label>
+                            <div class="input-group">
+                              <input [type]="showProfessorPassword ? 'text' : 'password'" 
+                                     class="form-control" 
+                                     placeholder="Enter password" 
+                                     name="pwd" 
+                                     [(ngModel)]="professor.password" 
+                                     required 
+                                     #professorpassword="ngModel" 
+                                     [class.is-invalid]="professorpassword.invalid && professorpassword.touched" 
+                                     pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,20}$">
+                              <div class="input-group-append">
+                                <button type="button" class="btn btn-outline-secondary" (click)="showProfessorPassword = !showProfessorPassword">
+                                  <i class="fas" [ngClass]="showProfessorPassword ? 'fa-eye-slash' : 'fa-eye'"></i>
+                                </button>
+                              </div>
+                            </div>
+                            <div *ngIf="professorpassword.invalid && professorpassword.touched">
+                                <small class="text-danger" *ngIf="professorpassword.errors?.required">
+                                  <b>Required field</b>
+                                </small>
+                                <small class="text-danger" *ngIf="professorpassword.errors?.pattern">
+                                  <b>Password must contain at least one uppercase letter, one lowercase letter, one number, and be between 8 and 20 characters long.</b>
+                                </small>
+                              </div>
+                          </div>
+                      </div>
+                      <div class="col-md-6">
+                          <div class="form-group">
+                              <label>Institution Name: <b class="text-danger">*</b></label>
+                              <input type="text" class="form-control" placeholder="Enter institution name" name="institutionname" [(ngModel)]="professor.institutionname" required #institutionname="ngModel" [class.is-invalid]="institutionname.invalid && institutionname.touched">
+                              <small class="text-danger" [class.d-none]="institutionname.valid || institutionname.untouched"><b>Required field</b></small>
+                          </div>
+                          <div class="form-group">
+                              <label>Department: <b class="text-danger">*</b></label>
+                              <input type="text" class="form-control" placeholder="Enter department" name="department" [(ngModel)]="professor.department" required #department="ngModel" [class.is-invalid]="department.invalid && department.touched">
+                              <small class="text-danger" [class.d-none]="department.valid || department.untouched"><b>Required field</b></small>
+                          </div>
+                          <div class="form-group">
+                              <label>Years of Experience: <b class="text-danger">*</b></label>
+                              <input type="number" class="form-control" placeholder="Enter years of experience" name="experience" [(ngModel)]="professor.experience" required #experience="ngModel" [class.is-invalid]="experience.invalid && experience.touched">
+                              <small class="text-danger" [class.d-none]="experience.valid || experience.untouched"><b>Required field</b></small>
+                          </div>
+                          <div class="form-group">
+                              <label>Degrees Completed: <b class="text-danger">*</b></label>
+                              <input type="text" class="form-control" placeholder="Enter degrees completed" name="degreecompleted" [(ngModel)]="professor.degreecompleted" required #degreecompleted="ngModel" [class.is-invalid]="degreecompleted.invalid && degreecompleted.touched">
+                              <small class="text-danger" [class.d-none]="degreecompleted.valid || degreecompleted.untouched"><b>Required field</b></small>
+                          </div>
+                          <div class="form-group">
+                            <label>Confirm Password: <b class="text-danger">*</b></label>
+                            <div class="input-group">
+                              <input [type]="showProfessorConfirmPassword ? 'text' : 'password'" 
+                                     class="form-control" 
+                                     placeholder="Confirm password" 
+                                     name="ConfirmPassword" 
+                                     [(ngModel)]="professor.confirmPassword" 
+                                     required 
+                                     #professorconfirmPassword="ngModel" 
+                                     [class.is-invalid]="professorconfirmPassword.invalid && professorconfirmPassword.touched">
+                              <div class="input-group-append">
+                                <button type="button" class="btn btn-outline-secondary" (click)="showProfessorConfirmPassword = !showProfessorConfirmPassword">
+                                  <i class="fas" [ngClass]="showProfessorConfirmPassword ? 'fa-eye-slash' : 'fa-eye'"></i>
+                                </button>
+                              </div>
+                            </div>
+                            <small class="text-danger" [class.d-none]="(professorconfirmPassword.value === professorpassword.value) || professorconfirmPassword.untouched"><b>Passwords do not match</b></small>
+                          </div>
+                      </div>
+                  </div>
+                  
+                  <button [disabled]="professorform.form.invalid" type="submit" class="btn registerbtn">Register</button>
+                  <div class="sign-up">Already have an account? <a [routerLink]="['/login']" class="signup-link"><b>Login here</b></a></div>
+              </form>
+          </div>
+      </div>
+  </div>
+</div>

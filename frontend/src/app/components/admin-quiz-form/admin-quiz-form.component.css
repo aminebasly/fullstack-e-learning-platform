@@ -1,0 +1,99 @@
+.quiz-form-container {
+  max-width: 800px;
+  margin: 40px auto;
+  background: #fdfdfd;
+  padding: 30px;
+  border-radius: 12px;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.05);
+}
+
+.title {
+  text-align: center;
+  color: #333;
+  margin-bottom: 20px;
+}
+
+.form-group {
+  margin-bottom: 15px;
+}
+
+.form-control {
+  width: 100%;
+  padding: 8px 12px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  box-sizing: border-box;
+}
+
+textarea.form-control {
+  resize: vertical;
+}
+
+.option-row {
+  margin-bottom: 10px;
+}
+
+.btn {
+  padding: 10px 16px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 15px;
+}
+
+.btn-add {
+  background-color: #1976d2;
+  color: white;
+  margin-top: 10px;
+}
+
+.btn-submit {
+  background-color: #43a047;
+  color: white;
+  margin-top: 20px;
+}
+
+.hint {
+  font-size: 0.85em;
+  color: #666;
+  margin-top: 5px;
+}
+
+.preview-section {
+  margin-top: 30px;
+}
+
+.preview-section ul {
+  list-style: none;
+  padding-left: 0;
+}
+
+.preview-section li {
+  background: #fafafa;
+  padding: 10px;
+  margin-bottom: 8px;
+  border-left: 4px solid #1976d2;
+  border-radius: 4px;
+}
+.question-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #fafafa;
+  padding: 10px;
+  margin-bottom: 8px;
+  border-left: 4px solid #1976d2;
+  border-radius: 4px;
+}
+
+.btn-delete {
+  background-color: #e53935;
+  color: white;
+  font-size: 16px;
+  padding: 6px 10px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+

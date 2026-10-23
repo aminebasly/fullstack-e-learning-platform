@@ -1,0 +1,90 @@
+<div class="app-wrapper">
+  <app-header></app-header>
+
+  <!-- Sidebar -->
+  <div class="sidebar">
+    <div class="logo-container">
+      <img src="/assets/img/English-Star.jpg" width="40" height="40" class="main-logo" alt="English Star Logo">
+    </div>
+
+    <div class="sidebar-content">
+      <div class="logo-details">
+        <i class="fa fa-bars" (click)="toggleSidebar()"></i>
+        <div class="logo_name">
+          <img *ngIf="professor?.gender === 'Male'" src="/assets/img/maleprofessor.png" width="40" height="40" class="main-logo" alt="Male Professor">
+          <img *ngIf="professor?.gender === 'Female'" src="/assets/img/femaleprofessor.png" width="40" height="40" class="main-logo" alt="Female Professor">
+          <a>Professor</a>
+        </div>
+      </div>
+
+      <ul class="nav-list">
+        <li [routerLink]="['/professor-profile/:email']">
+          <a><i class="fa fa-edit"></i><span class="links_name">Edit Profile</span></a>
+          <span class="tooltip">Edit Profile</span>
+        </li>
+        <li [routerLink]="['/content/create']">
+          <a><i class="fa fa-book"></i><span class="links_name">Add Content</span></a>
+          <span class="tooltip">Add Content</span>
+        </li>
+        <li [routerLink]="['/quiz-form']">
+          <a><i class="fa fa-question-circle"></i><span class="links_name">Add Quiz</span></a>
+          <span class="tooltip">Add Quiz</span>
+        </li>
+        <li [routerLink]="['/Adminpanel']">
+          <a><i class="fa fa-list"></i><span class="links_name">Professor Panel</span></a>
+          <span class="tooltip">Professor Panel</span>
+        </li>
+        <li [routerLink]="['/professorlist']">
+          <a><i class="fa fa-user-o"></i><span class="links_name">Professors</span></a>
+          <span class="tooltip">Professors</span>
+        </li>
+        <li [routerLink]="['/userlist']">
+          <a><i class="fa fa-user"></i><span class="links_name">Users</span></a>
+          <span class="tooltip">Users</span>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- Main Content -->
+  <div class="main-content">
+    <div class="home-section">
+      <div class="headtxt">Welcome to Professor Dashboard 👋</div>
+      <br>
+
+      <div class="dashboard-grid">
+        <!-- Learners Card -->
+        <div class="dashboard-card">
+          <div class="circle learners"><i id="icons" class="fa fa-graduation-cap"></i></div>
+          <div class="text">Learners</div>
+          <div class="sub-text">{{ totalUsers }} total learners</div>
+        </div>
+
+        <!-- Professors Card -->
+        <div class="dashboard-card">
+          <div class="circle professors"><i id="icons" class="fa fa-user-o"></i></div>
+          <div class="text">Professors</div>
+          <div class="sub-text">{{ professorsCount }} {{ professorsCount === 1 ? 'Professor teaching' : 'Professors teaching' }}</div>
+        </div>
+
+        <!-- Completed Content Card -->
+        <div class="dashboard-card">
+          <div class="circle completed"><i id="icons" class="fa fa-check-circle"></i></div>
+          <div class="text">Completed Content</div>
+          <div class="sub-text">{{ totalCompletedContent }} completed</div>
+        </div>
+      </div>
+      <br><br>
+
+      <!-- Pie Chart Card -->
+      <div class="dashboard-card pie-chart-card">
+        <div class="chart-title">Users Access by Gender</div>
+        <div class="chart-container">
+          <canvas baseChart [data]="pieChartData" [options]="pieChartOptions" [type]="'doughnut'"></canvas>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <app-footer></app-footer>
+</div>

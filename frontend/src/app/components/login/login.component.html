@@ -1,0 +1,183 @@
+<div class="wrapper">
+  <div class="container">
+    <!-- Logo and Name in Top-Left -->
+    <div class="header">
+      <img src="/assets/img/English-Star.jpg" alt="English Star Logo" class="logo">
+      <span class="brand-name">English Star</span>
+    </div>
+
+    <!-- Role Selection Buttons -->
+    <div class="role-buttons">
+      <button class="headbtn" [ngClass]="{'active': activeForm === 'user'}" (click)="showForm('user')">User</button>
+      <button class="headbtn" [ngClass]="{'active': activeForm === 'professor'}" (click)="showForm('professor')">Professor</button>
+      <button class="headbtn" [ngClass]="{'active': activeForm === 'admin'}" (click)="showForm('admin')">Admin</button>
+    </div>
+
+    <div class="login-form" *ngIf="activeForm === 'user'">
+      <h2 class="textual">User Login</h2>
+      <form #userloginform="ngForm" (ngSubmit)="loginUser()">
+        <small class="text-danger"><b>{{msg}}</b></small>
+        
+        <!-- Email Field -->
+        <div class="form-group">
+          <label for="email">User Email address: <b class="text-danger">*</b></label>
+          <input type="email" class="form-control" placeholder="Enter email" name="email" [(ngModel)]="user.email" required pattern="^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+$" #email="ngModel" [class.is-invalid]="email.invalid && email.touched">
+          <div *ngIf="email.errors && email.invalid && email.touched">
+            <small class="text-danger" *ngIf="email.errors.required"><b>Required field</b></small>
+            <small class="text-danger" *ngIf="email.errors.pattern"><b>Invalid email</b></small>
+          </div>
+        </div>
+    
+        <!-- Password Field with Show/Hide Toggle -->
+        <div class="form-group">
+          <label for="pwd">User Password: <b class="text-danger">*</b></label>
+          <div class="input-group">
+            <!-- Password input field -->
+            <input 
+              [type]="showPassword ? 'text' : 'password'" 
+              class="form-control" 
+              placeholder="Enter password" 
+              name="pwd" 
+              [(ngModel)]="user.password" 
+              required 
+              #password="ngModel" 
+              [class.is-invalid]="password.invalid && password.touched"
+            >
+            <!-- Eye icon button to toggle password visibility -->
+            <div class="input-group-append">
+              <button 
+                type="button" 
+                class="btn btn-outline-secondary" 
+                (click)="togglePasswordVisibility()"
+              >
+                <i class="fas" [ngClass]="showPassword ? 'fa-eye-slash' : 'fa-eye'"></i>
+              </button>
+            </div>
+          </div>
+          <div *ngIf="password.errors && password.invalid && password.touched">
+            <small class="text-danger" *ngIf="password.errors.required"><b>Required field</b></small>
+          </div>
+        </div>
+    
+        <!-- Forgot Password Link -->
+        <div class="options">
+          <label> </label>
+          <a [routerLink]="['/forgot-password']" class="forgot-link">Forgot password?</a>
+        </div>
+    
+        <!-- Submit Button -->
+        <button [disabled]="userloginform.form.invalid" type="submit" class="btn loginbtn">Login</button>
+      </form>
+    
+      <!-- Sign Up Link -->
+      <div class="sign-up">Don't have an account? <a [routerLink]="['/registration']" class="signup-link"><b>Create One</b></a></div>
+      <hr>
+    </div>
+
+
+    <!-- Professor Login Form -->
+<div class="login-form" *ngIf="activeForm === 'professor'">
+  <h2 class="textual">Professor Login</h2>
+  <form #professorloginform="ngForm" (ngSubmit)="loginProfessor()">
+    <small class="text-danger"><b>{{ msg }}</b></small>
+    
+    <!-- Email Field -->
+    <div class="form-group">
+      <label for="professoremail">Professor Email address: <b class="text-danger">*</b></label>
+      <input type="email" class="form-control" placeholder="Enter email" name="professoremail" [(ngModel)]="professor.email" required pattern="^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+$" #professoremail="ngModel" [class.is-invalid]="professoremail.invalid && professoremail.touched">
+      <div *ngIf="professoremail.errors && professoremail.invalid && professoremail.touched">
+        <small class="text-danger" *ngIf="professoremail.errors.required"><b>Required field</b></small>
+        <small class="text-danger" *ngIf="professoremail.errors.pattern"><b>Invalid email</b></small>
+      </div>
+    </div>
+    
+    <!-- Password Field -->
+    <div class="form-group">
+      <label for="pwd">Professor Password: <b class="text-danger">*</b></label>
+      <div class="input-group">
+        <input 
+          [type]="showPassword ? 'text' : 'password'" 
+          class="form-control" 
+          placeholder="Enter password" 
+          name="pwd" 
+          [(ngModel)]="professor.password" 
+          required 
+          #professorpassword="ngModel" 
+          [class.is-invalid]="professorpassword.invalid && professorpassword.touched"
+        >
+        <div class="input-group-append">
+          <button type="button" class="btn btn-outline-secondary" (click)="togglePasswordVisibility()">
+            <i class="fas" [ngClass]="showPassword ? 'fa-eye-slash' : 'fa-eye'"></i>
+          </button>
+        </div>
+      </div>
+      <div *ngIf="professorpassword.errors && professorpassword.invalid && professorpassword.touched">
+        <small class="text-danger" *ngIf="professorpassword.errors.required"><b>Required field</b></small>
+      </div>
+    </div>
+
+    <!-- Forgot Password & Submit -->
+    <div class="options">
+      <label></label>
+      <a [routerLink]="['/forgot-password']" class="forgot-link">Forgot password?</a>
+    </div>
+    <button [disabled]="professorloginform.form.invalid" type="submit" class="btn loginbtn">Login</button>
+  </form>
+
+  <!-- Registration Link -->
+  <div class="sign-up">
+    Don't have an account? <a [routerLink]="['/registration']" class="signup-link"><b>Create One</b></a>
+  </div>
+  <hr>
+</div>
+
+<!-- ✅ Bootstrap Modal for Professor Status -->
+<div id="statusModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="statusModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="statusModalLabel">Account Status</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="closeStatusModal()">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <p>{{ statusMessage }}</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="closeStatusModal()">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+    <!-- Admin Login Form -->
+    <div class="login-form" *ngIf="activeForm === 'admin'">
+      <h2 class="textual">Admin Login</h2>
+      <form #adminloginform="ngForm" (ngSubmit)="adminLogin()">
+        <small class="text-danger"><b>{{msg}}</b></small>
+        <div class="form-group">
+          <label for="email">Admin Email address: <b class="text-danger">*</b></label>
+          <input type="email" class="form-control" placeholder="Enter admin email" name="email" [(ngModel)]="adminEmail" required pattern="^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+$" #adminemail="ngModel" [class.is-invalid]="adminemail.invalid && adminemail.touched">
+          <div *ngIf="adminemail.errors && adminemail.invalid && adminemail.touched">
+            <small class="text-danger" *ngIf="adminemail.errors.required"><b>Required field</b></small>
+            <small class="text-danger" *ngIf="adminemail.errors.pattern"><b>Invalid email</b></small>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="pwd">Admin Password: <b class="text-danger">*</b></label>
+          <input type="password" class="form-control" placeholder="Enter admin password" name="pwd" [(ngModel)]="adminPassword" required #adminpassword="ngModel" [class.is-invalid]="adminpassword.invalid && adminpassword.touched">
+          <div *ngIf="adminpassword.errors && adminpassword.invalid && adminpassword.touched">
+            <small class="text-danger" *ngIf="adminpassword.errors.required"><b>Required field</b></small>
+          </div>
+          <small class="hint">Only the admin knows the correct email & password</small>
+        </div>
+        <div class="options">
+          <a href="#" class="forgot-link">Forgot password?</a>
+        </div>
+        <button [disabled]="adminloginform.form.invalid" type="submit" class="btn loginbtn">Login</button>
+      </form>
+    </div>
+  </div>
+</div>

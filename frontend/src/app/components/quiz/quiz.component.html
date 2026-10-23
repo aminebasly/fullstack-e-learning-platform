@@ -1,0 +1,170 @@
+<div class="page-wrapper">
+  <app-header></app-header>
+    <div *ngIf="isPreviewMode"  class="panel-nav-wrapper">
+      <button class="panel-nav-button" (click)="navigateToPanel()">
+    <mat-icon>dashboard</mat-icon> Navigate to Panel
+  </button>
+  </div>
+
+  <div class="content-wrapper">
+  <div class="quiz-container">
+   
+<div *ngIf="isPreviewMode" class="admin-preview-banner">
+  <strong>👀 Preview Mode:</strong> You are viewing the quiz in read-only mode . Submissions is disabled.
+
+  
+    
+</div>
+<br>
+
+      <h2 class="quiz-title">{{ quizType }} Quiz</h2>
+
+      <form *ngIf="!submitted" class="quiz-form">
+        <div *ngFor="let q of questions; let i = index" class="quiz-question">
+          <p class="question-text"><strong>Q{{ i + 1 }}:</strong> {{ q.text }}</p>
+
+          <!-- MULTIPLE_CHOICE -->
+          <div *ngIf="q.type === 'MULTIPLE_CHOICE'" class="options-group">
+            <div *ngFor="let opt of q.options; let j = index" class="option-choice">
+              <label class="option-label">
+                <input
+  type="radio"
+  [(ngModel)]="answers[i]"
+  name="q{{ i }}"
+  [value]="j"
+  class="radio-input"
+  [disabled]="isPreviewMode"
+/>
+
+                <span class="custom-radio"></span>
+                {{ opt }}
+              </label>
+            </div>
+          </div>
+
+          <!-- TRUE_FALSE -->
+          <div *ngIf="q.type === 'TRUE_FALSE'" class="options-group">
+            <label class="option-label">
+              <input
+  type="radio"
+  [(ngModel)]="answers[i]"
+  name="q{{ i }}"
+  [value]="1"
+  class="radio-input"
+  [disabled]="isPreviewMode"
+/>
+              <span class="custom-radio"></span>
+              True
+            </label>
+            <label class="option-label">
+             <input
+  type="radio"
+  [(ngModel)]="answers[i]"
+  name="q{{ i }}"
+  [value]="0"
+  class="radio-input"
+  [disabled]="isPreviewMode"
+/>
+              <span class="custom-radio"></span>
+              False
+            </label>
+          </div>
+        </div>
+
+        <button
+  type="button"
+  (click)="submitQuiz()"
+  class="btn-submit"
+  *ngIf="!isPreviewMode"
+>
+  ✅ Submit Quiz
+</button>
+
+      </form>
+
+      <!-- Result Modal -->
+      <div class="modal" [class.show]="showModal">
+        <div class="modal-content" [class.placement]="quizType.toUpperCase() === 'PLACEMENT'">
+          <!-- Level Quiz Results -->
+          <div *ngIf="quizType.toUpperCase() !== 'PLACEMENT'">
+            <div *ngIf="score >= 70" class="success-animation">
+              <svg class="checkmark" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 52 52">
+                <circle class="checkmark__circle" cx="26" cy="26" r="25" fill="none"/>
+                <path class="checkmark__check" fill="none" d="M14.1 27.2l7.1 7.2 16.7-16.8"/>
+              </svg>
+              <h2>Level Complete!</h2>
+            </div>
+            
+            <div *ngIf="score < 70" class="failure-animation">
+              <div class="failure-icon">✕</div>
+              <h2>Keep Practicing!</h2>
+            </div>
+            
+            <div class="score-display">
+              <div class="score-circle" [class.passed]="score >= 70" [class.failed]="score < 70">
+                {{ score }}%
+              </div>
+            </div>
+            
+            <p class="result-message">{{ levelAdvanceMessage }}</p>
+            
+            <div *ngIf="askPaymentModal" class="payment-section">
+              <div class="premium-features">
+                <h3>Unlock Premium Features:</h3>
+                <ul>
+                  <li>✔️ Access to all levels</li>
+                  <li>✔️ Detailed progress tracking</li>
+                  <li>✔️ Personalized feedback</li>
+                </ul>
+              </div>
+              <button (click)="goToPayment()" class="btn-pay">Upgrade Now</button>
+              <button (click)="closeModal()" class="btn-later">Maybe Later</button>
+            </div>
+          </div>
+          
+          <!-- Placement Test Results -->
+          <div *ngIf="quizType.toUpperCase() === 'PLACEMENT'">
+            <div class="placement-results">
+              <h2>Your Language Level</h2>
+              <div class="level-display {{ currentLevel.toLowerCase() }}">
+                {{ currentLevel }}
+              </div>
+              <p class="result-message">{{ levelAdvanceMessage }}</p>
+              <div class="level-description">
+                <p>At this level you can:</p>
+                <ul>
+                  <li *ngIf="currentLevel === 'A1'">
+                    <span class="level-icon">🌱</span> Understand basic words and phrases about yourself
+                  </li>
+                  <li *ngIf="currentLevel === 'A2'">
+                    <span class="level-icon">📝</span> Have simple conversations about familiar topics
+                  </li>
+                  <li *ngIf="currentLevel === 'B1'">
+                    <span class="level-icon">✈️</span> Handle travel situations and describe experiences
+                  </li>
+                  <li *ngIf="currentLevel === 'B2'">
+                    <span class="level-icon">💬</span> Discuss abstract topics and technical subjects in your field
+                  </li>
+                  <li *ngIf="currentLevel === 'C1'">
+                    <span class="level-icon">🎯</span> Express yourself fluently in social, academic and professional situations
+                  </li>
+                  <li *ngIf="currentLevel === 'C2'">
+                    <span class="level-icon">🏆</span> Understand and participate in any conversation with native-level fluency
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+          
+          <div class="action-buttons">
+            <button (click)="closeModal()" class="btn-close">OK</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <app-footer >
+   
+  </app-footer>
+</div>

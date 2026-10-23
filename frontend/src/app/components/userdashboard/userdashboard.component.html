@@ -1,0 +1,144 @@
+<app-header></app-header>
+
+<div class="sidebar">
+  <!-- Logo Container -->
+  <div class="logo-container">
+    <img [src]="'/assets/img/English-Star.jpg'" width="40" height="40" class="main-logo" alt="English Star Logo">
+  </div>
+
+  <!-- Sidebar Content -->
+  <div class="sidebar-content">
+    <div class="logo-details">
+      <i class="fa fa-bars" (click)="toggleSidebar()"></i>
+      <div class="logo_name">
+        <img *ngIf="user?.gender === 'Male' || user?.gender === 'male'" [src]="'/assets/img/maleuser.png'" width="40" height="40" class="main-logo" alt="Male User">
+        <img *ngIf="user?.gender === 'Female' || user?.gender === 'female'" [src]="'/assets/img/femaleuser.png'" width="40" height="40" class="main-logo" alt="Female User">
+        <a>User</a>
+    </div>
+    </div>
+    <ul class="nav-list">
+      <li [routerLink]="['/edituserprofile']">
+        <a>
+          <i class="fa fa-edit"></i>
+          <span class="links_name">Edit Profile</span>
+        </a>
+        <span class="tooltip">Edit Profile</span>
+      </li>
+      
+      <li (click)="goToResume()">
+  <a>
+    <i class="fa fa-graduation-cap"></i>
+    <span class="links_name">Resume Learning</span>
+  </a>
+  <span class="tooltip">Resume Learning</span>
+</li>
+
+      
+      <li [routerLink]="['/professorlist']">
+        <a>
+          <i class="fa fa-user-o"></i>
+          <span class="links_name">Professors</span>
+        </a>
+        <span class="tooltip">Professors</span>
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
+<div class="home-section">
+  <div class="container">
+    <div class="row">
+      <div class="headtxt">Welcome back <span style="color: orange;">{{username}}</span></div>
+      
+    </div>
+    <br> <br><br>
+    
+<div class="dashboard-container">
+
+  <!-- Current Level Card -->
+  <div class="dashboard-card">
+    <div class="circle"><i class="fa fa-level-up"></i></div>
+    <div class="text">Current Level</div>
+    <div class="sub-text">{{ user.currentLevel }}</div>
+  </div>
+
+  <!-- Completed Units Card -->
+  <div class="dashboard-card">
+    <div class="circle"><i class="fa fa-check-circle"></i></div>
+    <div class="text">Completed Contents</div>
+    <div class="sub-text">{{ totalCompletedContent }}</div>
+  </div>
+
+  <!-- Badges Card -->
+ <div class="dashboard-card">
+  <div class="circle"><i class="fa fa-star"></i></div>
+  <div class="text">Badges</div>
+
+  <div class="sub-text" *ngIf="getBadgeList().length > 0; else noBadges">
+    <div *ngFor="let badge of getBadgeList()" class="badge" [ngClass]="badge.toLowerCase()">
+      <i class="fa" [ngClass]="getBadgeIcon(badge)"></i> {{ badge }}
+    </div>
+  </div>
+
+  <ng-template #noBadges>
+    <div class="sub-text">No badges earned yet.</div>
+  </ng-template>
+</div>
+
+
+</div>
+
+
+
+
+
+
+  <!-- Progress Section -->
+  <div class="progress-section">
+    <h2>Your Progress</h2>
+    <div class="level-card" *ngFor="let level of levels">
+      <div class="level-header">
+        <h3>{{ level }}</h3>
+        <span>{{ progressSummary[level] || 0 | number:'1.0-0' }}% Complete</span>
+      </div>
+      <div class="progress-bar">
+        <div class="progress-fill" [style.width.%]="progressSummary[level] || 0"></div>
+      </div>
+      <div class="level-actions">
+        <button (click)="navigateToContent(level)" [disabled]="!levelAccess[level]">
+          View Content
+        </button>
+        <button 
+  (click)="navigateToQuiz(level)" 
+  [disabled]="!canTakeQuiz(level) || hasAlreadyAttempted(level)">
+  Take Quiz
+</button>
+<span *ngIf="hasAlreadyAttempted(level)" class="quiz-completed-badge">
+  ✅ Quiz Completed
+</span>
+
+
+
+      </div>
+    </div>
+  </div>
+
+  <!-- Quiz Attempts Section -->
+  <div class="quiz-section">
+    <h2>Quiz Attempts</h2>
+    <div class="quiz-attempts" *ngIf="quizAttempts.length > 0; else noAttempts">
+      <div class="attempt-card" *ngFor="let attempt of quizAttempts">
+        <p><strong>{{ attempt.quizType }}</strong>: {{ attempt.score }}%</p>
+        <p><small>{{ attempt.attemptedAt | date:'medium' }}</small></p>
+      </div>
+    </div>
+    <ng-template #noAttempts>
+      <p>No quiz attempts yet.</p>
+    </ng-template>
+  </div>
+</div>
+
+    
+    
+</div> <br><br><br>  <app-footer></app-footer>

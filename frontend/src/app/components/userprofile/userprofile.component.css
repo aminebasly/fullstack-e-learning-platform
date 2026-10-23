@@ -1,0 +1,229 @@
+.profile-container {
+  max-width: 600px;
+  margin: 20px auto;
+  padding: 20px;
+  text-align: center;
+}
+
+.profile-card {
+  background: #fff;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  margin-bottom: 20px;
+}
+
+.profile-card p {
+  margin: 10px 0;
+  font-size: 16px;
+}
+
+.profile-card strong {
+  color: #413613;
+  margin-right: 5px;
+}
+
+.edit-profile {
+  max-width: 600px;
+  margin: 20px auto;
+  padding: 20px;
+  background: #fff;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+h2 {
+  color: #413613;
+  font-family: 'Aladin', sans-serif;
+  margin-bottom: 20px;
+}
+
+.form-group {
+  margin-bottom: 15px;
+  text-align: left;
+}
+
+.form-group label {
+  display: block;
+  font-weight: bold;
+  color: #413613;
+  margin-bottom: 5px;
+}
+
+.form-group input,
+.form-group select { /* Added select styling */
+  width: 100%;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 14px;
+}
+
+.form-group .form-check { /* Style radio buttons */
+  margin-bottom: 5px;
+}
+
+.btn-group {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+.save-btn,
+.cancel-btn,
+.edit-btn { /* Changed editbtn to edit-btn for consistency */
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: background-color 0.3s;
+}
+
+.edit-btn { /* Changed editbtn to edit-btn for consistency */
+  background-color: #13534e;
+  color: white;
+}
+
+.edit-btn:hover { /* Changed editbtn to edit-btn for consistency */
+  background-color: #0a3d3b;
+}
+
+.save-btn {
+  background-color: #28a745;
+  color: white;
+}
+
+.save-btn:hover {
+  background-color: #218838;
+}
+
+.cancel-btn {
+  background-color: #dc3545;
+  color: white;
+}
+
+.cancel-btn:hover {
+  background-color: #c82333;
+}
+
+.message {
+  margin-top: 15px;
+  font-weight: bold;
+  color: #28a745;
+}
+
+.message.error-message { /* Changed .message.error to .message.error-message */
+  color: #dc3545;
+}
+
+.text-danger { /* Added for error message text */
+  color: #dc3545;
+}
+
+.hint { /* Added for password hint */
+  font-size: 12px;
+  color: #888;
+}
+
+.d-flex { /* Added for gender radio buttons */
+  display: flex;
+}
+
+.gap-3 { /* Added for gender radio buttons */
+  gap: 1rem;
+}
+
+.mb-3 { /* Added for gender radio buttons */
+  margin-bottom: 1rem;
+}
+
+.form-check-input { /* Added for gender radio buttons */
+  margin-top: 0.25rem;
+  vertical-align: top;
+  background-color: #fff;
+  border: 1px solid rgba(0, 0, 0, 0.25);
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  width: 1rem;
+  height: 1rem;
+  cursor: pointer;
+}
+
+.form-check-input:checked { /* Added for gender radio buttons */
+  background-color: #0d6efd;
+  border-color: #0d6efd;
+}
+
+.form-check-input:checked[type=radio] { /* Added for gender radio buttons */
+  background-image: radial-gradient(circle at 50% 50%, #fff 0, #0d6efd 60%);
+}
+
+.form-check-label { /* Added for gender radio buttons */
+  margin-left: 0.5rem;
+}
+
+.form-control { /* Added for input styling */
+  display: block;
+  width: 100%;
+  padding: 0.375rem 0.75rem;
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.5;
+  color: #212529;
+  background-color: #fff;
+  background-clip: padding-box;
+  border: 1px solid #ced4da;
+  appearance: none;
+  border-radius: 0.25rem;
+  transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+}
+
+.is-invalid { /* Added for invalid input styling */
+  border-color: #dc3545;
+}
+/* Add to your existing CSS */
+
+.input-group {
+  display: flex;
+}
+
+.input-group-append {
+  display: flex;
+  align-items: stretch;
+}
+
+.input-group-append button {
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+}
+
+.input-group-append button i {
+  pointer-events: none; /* Prevent icons from interfering with button clicks */
+}
+
+.password-input-container {
+  position: relative; /* Make the container relative */
+}
+
+.password-input-container input {
+  padding-right: 20px; /* Leave space for the button on the right */
+}
+
+.password-toggle-button {
+  position: absolute; /* Position the button absolutely */
+  top: 50%;
+  right: 30px;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  outline: none;
+}
+
+.password-toggle-button i {
+  pointer-events: none; /* Prevent icon from interfering with button clicks */
+}

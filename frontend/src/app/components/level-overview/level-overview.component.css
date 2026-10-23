@@ -1,0 +1,348 @@
+/* CSS Variables for Consistency */
+:root {
+  --primary-color: #3182ce;
+  --secondary-color: #48bb78;
+  --accent-color: #f0f9ff;
+  --border-color: #e2e8f0;
+  --text-color: #2d3748;
+  --text-secondary: #718096;
+  --shadow: 0 2px 5px rgba(0,0,0,0.1);
+  --transition: all 0.3s ease;
+}
+
+.level-overview-container {
+  max-width: 1000px;
+  margin: auto;
+  padding: 20px;
+  background: #fff;
+}
+
+
+
+
+/* Summary Banner */
+.summary-banner {
+  background: var(--accent-color);
+  border: 1px solid #90cdf4;
+  border-radius: 12px;
+  padding: 15px;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.summary-banner h3 {
+  font-size: 1.3rem;
+  color: var(--text-color);
+}
+
+/* Section Title */
+.section-title {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  font-size: 2rem;
+  color: var(--text-color);
+  margin-bottom: 30px;
+}
+
+/* Resume Box */
+.resume-box {
+  background: var(--accent-color);
+  border: 1px solid #90cdf4;
+  border-radius: 12px;
+  padding: 20px;
+  margin-bottom: 30px;
+  text-align: center;
+  box-shadow: var(--shadow);
+}
+
+.resume-box h3 {
+  font-size: 1.5rem;
+  margin-bottom: 10px;
+}
+
+.resume-box p {
+  color: var(--text-secondary);
+  margin-bottom: 15px;
+}
+
+.highlight {
+  color: var(--primary-color);
+  font-weight: bold;
+}
+
+.resume-button {
+  background: var(--primary-color);
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: var(--transition);
+}
+
+.resume-button:hover {
+  background: #f1a20f;
+  transform: translateY(-2px);
+}
+
+/* CTA Banner */
+.cta-banner {
+  background: linear-gradient(135deg, #fefcbf, #fed7aa);
+  border-radius: 12px;
+  padding: 20px;
+  text-align: center;
+  margin-bottom: 30px;
+  box-shadow: var(--shadow);
+}
+
+.cta-banner h4 {
+  font-size: 1.2rem;
+  color: var(--text-color);
+  margin-bottom: 15px;
+}
+
+/* Units Grid */
+.units-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 20px;
+}
+
+/* Unit Card */
+.unit-card {
+  background: #fff;
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+  padding: 20px;
+  text-align: center;
+  box-shadow: var(--shadow);
+  position: relative;
+  transition: var(--transition);
+}
+
+.unit-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+}
+
+.unit-card img {
+  margin-bottom: 15px;
+}
+
+.unit-card h3 {
+  font-size: 1.25rem;
+  margin-bottom: 10px;
+}
+
+.unit-card p {
+  color: var(--text-secondary);
+  margin-bottom: 15px;
+}
+
+.progress-bar-container {
+  background: #edf2f7;
+  height: 10px;
+  border-radius: 5px;
+  margin: 10px 0;
+  overflow: hidden;
+}
+
+.progress-bar-fill {
+  background: #4caf50; /* Set to green for visibility — replace with your brand color later */
+  height: 100%;         /* VERY important: this makes it show inside the container */
+  width: 0%;            /* This will be overridden by Angular’s [style.width.%] */
+  transition: width 0.4s ease-in-out;
+}
+
+
+
+
+.badge {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  padding: 5px 10px;
+  border-radius: 12px;
+  font-size: 0.8rem;
+  font-weight: bold;
+  color: white;
+}
+
+.badge-complete {
+  background: var(--secondary-color);
+}
+
+.badge-in-progress {
+  background: #f6ad55;
+}
+
+.badge-not-started {
+  background: #a0aec0;
+}
+
+.unit-button {
+  background: var(--primary-color);
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 0.95rem;
+  transition: background 0.2s, transform 0.2s, box-shadow 0.2s;
+  box-shadow: 0 2px 8px rgba(144, 73, 214, 0.08);
+  display: inline-block; /* Make sure it's always visible */
+  opacity: 1;           /* Make sure it's not transparent */
+  visibility: visible;  /* Ensure it's not hidden */
+  width: auto;          /* Don't let it collapse */
+  height: auto;   
+  display: inline-block !important;
+  opacity: 1 !important;      /* Don't let it collapse */
+}
+
+
+.unit-button:hover {
+  /* Keep your hover effects, but don't change visibility */
+  background: #9049d6;
+  transform: scale(1.05);
+  box-shadow: 0 4px 16px rgba(144, 73, 214, 0.16);
+}
+.unit-button:focus {
+  background: #9049d6;
+  transform: scale(1.05);
+  box-shadow: 0 4px 16px rgba(144, 73, 214, 0.16);
+}
+/* Loading Skeleton */
+.loading-skeleton {
+  background: #f7fafc;
+}
+
+.skeleton-icon {
+  width: 70px;
+  height: 70px;
+  background: #e2e8f0;
+  border-radius: 8px;
+  margin: 0 auto 15px;
+}
+
+.skeleton-title {
+  width: 60%;
+  height: 1.5rem;
+  background: #e2e8f0;
+  border-radius: 4px;
+  margin: 0 auto 10px;
+}
+
+.skeleton-text {
+  width: 40%;
+  height: 1rem;
+  background: #e2e8f0;
+  border-radius: 4px;
+  margin: 0 auto 10px;
+}
+
+.skeleton-progress {
+  width: 80%;
+  height: 10px;
+  background: #e2e8f0;
+  border-radius: 4px;
+  margin: 10px auto;
+}
+
+.skeleton-button {
+  width: 50%;
+  height: 2rem;
+  background: #e2e8f0;
+  border-radius: 8px;
+  margin: 0 auto;
+}
+
+.unit-card img {
+  margin-bottom: 15px;
+  border-radius: 8px;
+  width: 70px;
+  height: 70px;
+  object-fit: contain;
+}
+
+.progress-bar-container {
+  background: #edf2f7;
+  height: 10px;
+  border-radius: 5px;
+  margin: 10px 0;
+  overflow: hidden;
+  position: relative;
+}
+
+
+
+/* Accessibility Enhancements */
+[role="progressbar"] {
+  outline: none;
+}
+
+/* Button improvements */
+
+.resume-button:focus {
+  outline: 3px solid var(--primary-color);
+  outline-offset: 2px;
+}
+
+
+/* Animations */
+.animate-in {
+  opacity: 0;
+  transform: translateY(30px) scale(0.98);
+  animation: fadeInUp 0.7s cubic-bezier(0.4, 0.2, 0.2, 1) forwards;
+  animation-delay: var(--animation-delay, 0s);
+  will-change: opacity, transform;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-pulse {
+  animation: pulse 1.5s infinite;
+}
+
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .units-grid {
+    grid-template-columns: 1fr;
+  }
+
+  
+
+  .section-title {
+    font-size: 1.8rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .section-title {
+    font-size: 1.5rem;
+  }
+
+  .unit-card {
+    padding: 15px;
+  }
+}

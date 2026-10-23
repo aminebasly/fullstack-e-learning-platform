@@ -1,0 +1,158 @@
+<app-header></app-header>
+
+<div class="main-layout-container">
+
+  <ng-template #loadingTemplate>
+    <div class="loading-spinner">Loading content...</div>
+  </ng-template>
+
+  <div class="back-button-container" *ngIf="userDetails?.role === 'USER'">
+    <button class="back-to-unit-button" (click)="goBackToUnit()">
+      <i class="fas fa-arrow-left"></i> Back to Unit {{ content?.unitNumber }}
+    </button>
+  </div>
+
+  <div *ngIf="userDetails?.role === 'ADMIN' || userDetails?.role === 'PROFESSOR'" class="panel-nav-wrapper">
+  <button class="panel-nav-button" (click)="navigateToPanel()">
+    <mat-icon>dashboard</mat-icon> Navigate to Panel
+  </button>
+</div>
+
+  <div *ngIf="userDetails?.role === 'ADMIN' || userDetails?.role === 'PROFESSOR'" class="admin-preview-banner">
+    👁️ You are previewing this content as <strong>{{ userDetails?.role }}</strong>. No progress will be tracked.
+     
+  </div>
+
+  <div class="content-player-container" *ngIf="content; else loadingTemplate">
+
+    <h2 class="content-title">
+      {{ content.type | titlecase }} - Unit {{ content.unitNumber }} | Content {{ content.contentNumber }}
+    </h2>
+
+    <div class="media-container" *ngIf="content.type !== 'GRAMMAR'">
+      <video
+        *ngIf="content.type === 'VIDEO'"
+        [src]="content.url"
+        controls
+        class="media-player"
+        (ended)="markAsCompleted()"
+      ></video>
+
+      <audio
+        *ngIf="content.type === 'LISTENING'"
+        [src]="content.url"
+        controls
+        class="media-player"
+        (ended)="markAsCompleted()"
+      ></audio>
+    </div>
+
+    <div class="grammar-container" *ngIf="content.type === 'GRAMMAR'">
+      <div class="grammar-text" [innerHTML]="content.grammarHtml"></div>
+
+      <div *ngIf="content.pdfUrl" class="pdf-viewer-container">
+        <pdf-viewer
+          [src]="content.pdfUrl"
+          [render-text]="true"
+          [original-size]="false"
+          [show-all]="true"
+          style="display: block;"
+        ></pdf-viewer>
+
+        <div class="pdf-actions">
+          <button class="pdf-button download" (click)="downloadPdf(content.pdfUrl)">
+            <mat-icon>download</mat-icon> Download PDF
+          </button>
+          <button class="pdf-button open" (click)="openPdfInNewTab(content.pdfUrl)">
+            <mat-icon>open_in_new</mat-icon> Open in New Tab
+          </button>
+        </div>
+      </div>
+
+      <button 
+        class="mark-complete-button" 
+        (click)="markAsCompleted()" 
+        *ngIf="userDetails?.role === 'USER'">
+        ✅ Mark as Completed
+      </button>
+    </div>
+
+    <div class="quiz-section" *ngIf="content.questions.length > 0">
+      <div *ngIf="userDetails?.role === 'USER' && content.questions.length > 0">
+        <div class="quiz-header">
+          <h3>Question {{ currentQuestionIndex + 1 }} of {{ content.questions.length }}</h3>
+          <div class="progress-bar">
+            <div
+              class="progress-fill"
+              [style.width.%]="((currentQuestionIndex + 1) / content.questions.length) * 100"
+            ></div>
+          </div>
+        </div>
+
+        <div class="question-text">
+          {{ content.questions[currentQuestionIndex].text }}
+        </div>
+
+        <div class="options-list">
+          <button
+            *ngFor="let option of content.questions[currentQuestionIndex].options; let i = index"
+            (click)="selectAnswer(i)"
+            [class.selected]="userAnswers[currentQuestionIndex] === i"
+            [disabled]="isQuizCompleted"
+            class="option-button"
+          >
+            {{ option }}
+          </button>
+        </div>
+
+        <div class="quiz-navigation">
+          <button
+            (click)="previousQuestion()"
+            [disabled]="currentQuestionIndex === 0"
+            class="nav-button"
+          >
+            ← Previous
+          </button>
+
+          <button
+            *ngIf="!isQuizCompleted"
+            (click)="nextQuestion()"
+            [disabled]="userAnswers[currentQuestionIndex] === -1"
+            class="nav-button primary"
+          >
+            {{ currentQuestionIndex === content.questions.length - 1 ? 'Finish Quiz' : 'Next' }}
+          </button>
+
+          <button
+            *ngIf="isQuizCompleted"
+            class="nav-button primary"
+            (click)="navigateToDashboard()"
+          >
+            Back to Dashboard
+          </button>
+        </div>
+
+        <div class="quiz-result" *ngIf="isQuizCompleted">
+          <h3>Quiz Completed!</h3>
+          <p>Your score: <strong>{{ calculateScore() }}%</strong></p>
+        </div>
+      </div>
+
+      <div *ngIf="userDetails?.role !== 'USER' && content.questions.length > 0" class="quiz-preview">
+        <h3>Quiz Preview (Admin/Professor)</h3>
+        <div *ngFor="let question of content.questions; let qIndex = index" class="question-block">
+          <p><strong>Q{{ qIndex + 1 }}:</strong> {{ question.text }}</p>
+          <ul>
+            <li *ngFor="let option of question.options; let oIndex = index">
+              {{ option }}
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div *ngIf="content.questions.length === 0" class="no-quiz-message">
+      <p>No quiz for this content. Enjoy your learning!</p>
+    </div>
+
+  </div> </div> <app-footer></app-footer>

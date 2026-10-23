@@ -1,0 +1,363 @@
+/* Variables for consistency (updated for better contrast and accessibility) */
+:host {
+  --primary-purple: #6B21A8; /* Darker, richer purple for better contrast */
+  --secondary-orange: #F97316; /* Vibrant orange with good contrast */
+  --text-color: #1F2937; /* Darker gray for better readability */
+  --light-gray-bg: #F9FAFB; /* Softer gray for backgrounds */
+  --card-bg: #FFFFFF; /* Clean white for cards */
+  --border-color: #E5E7EB; /* Lighter border for subtlety */
+  --shadow-light: rgba(0, 0, 0, 0.1); /* Slightly stronger shadow for depth */
+  --shadow-medium: rgba(0, 0, 0, 0.15);
+  --soft-shadow: rgba(0, 0, 0, 0.05);
+  --success-green: #10B981; /* Green for completed status */
+  --warning-yellow: #F59E0B; /* Yellow for in-progress status */
+  --error-red: #EF4444; /* Red for not-started status */
+  --focus-blue: #3B82F6; /* Blue for focus states */
+}
+
+/* Back Button Container */
+.back-button-container {
+  padding: 1.5rem 2rem; /* Increased padding for better spacing */
+  text-align: left;
+}
+
+.back-to-units-button {
+  background-color: var(--primary-purple); /* Use primary purple for consistency */
+  color: #FFFFFF;
+  font-weight: 600;
+  padding: 12px 20px; /* Slightly larger for better touch target */
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 1rem; /* Consistent font size */
+  transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
+  box-shadow: 0 4px 12px var(--shadow-light);
+  display: inline-flex; /* Better alignment for icon and text */
+  align-items: center;
+  gap: 8px; /* Consistent spacing */
+}
+
+.back-to-units-button i {
+  font-size: 1rem; /* Match button font size */
+}
+
+.back-to-units-button:hover {
+  background-color: #5B1891; /* Darker purple on hover */
+  transform: translateY(-2px); /* Subtle lift effect */
+}
+
+.back-to-units-button:focus {
+  outline: 3px solid var(--focus-blue); /* Accessible focus state */
+  outline-offset: 2px;
+  box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.3);
+}
+
+/* Global container */
+.unit-overview-wrapper {
+  max-width: 1024px; /* Slightly wider for modern screens */
+  margin: 2rem auto 4rem; /* Adjusted for better spacing */
+  padding: 0 1.5rem;
+  font-family: 'Inter', 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif; /* Modern font stack */
+  color: var(--text-color);
+}
+
+/* Header Styling */
+.unit-overview-header {
+  text-align: center;
+  margin-bottom: 3rem; /* More space for separation */
+  padding: 2rem 1.5rem;
+  background: linear-gradient(135deg, var(--primary-purple), #9333EA); /* Softer gradient */
+  color: #FFFFFF;
+  border-radius: 16px; /* Slightly larger radius */
+  box-shadow: 0 8px 24px var(--shadow-medium); /* Stronger shadow for prominence */
+}
+
+.unit-overview-header h1 {
+  font-size: 2.5rem; /* Slightly smaller for balance */
+  margin-bottom: 0.75rem;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+}
+
+.unit-overview-header h1 .fas {
+  font-size: 2rem; /* Slightly smaller for balance */
+  color: rgba(255, 255, 255, 0.95);
+}
+
+.level-badge {
+  background-color: var(--secondary-orange); /* Consistent with theme */
+  padding: 8px 16px; /* Larger for readability */
+  border-radius: 20px;
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin-left: 1rem;
+}
+
+.header-description {
+  font-size: 1rem; /* Slightly smaller for hierarchy */
+  max-width: 700px; /* Wider for larger screens */
+  margin: 0 auto;
+  line-height: 1.6;
+  opacity: 0.95;
+}
+
+/* Content Groups */
+.content-groups {
+  display: flex;
+  flex-direction: column;
+  gap: 3rem; /* Increased gap for clearer separation */
+}
+
+.content-group {
+  padding: 2rem; /* Consistent padding */
+  border-radius: 16px;
+  background-color: var(--card-bg);
+  box-shadow: 0 6px 16px var(--soft-shadow); /* Slightly stronger shadow */
+  border: 1px solid var(--border-color);
+}
+
+.group-title {
+  font-size: 2rem; /* Slightly smaller for balance */
+  color: var(--primary-purple);
+  margin-bottom: 1.5rem;
+  text-align: center;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+}
+
+.group-icon {
+  font-size: 1.8rem; /* Slightly smaller for balance */
+  color: var(--secondary-orange);
+}
+
+.content-list-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* Wider cards for comfort */
+  gap: 1.5rem; /* Consistent spacing */
+}
+
+/* Content Card */
+.content-card {
+  background-color: var(--light-gray-bg);
+  border-radius: 12px; /* Slightly larger radius */
+  box-shadow: 0 4px 12px var(--soft-shadow);
+  padding: 1.5rem;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  border: 1px solid var(--border-color);
+}
+
+.content-card:hover {
+  transform: translateY(-6px); /* Slightly stronger lift */
+  box-shadow: 0 8px 20px var(--shadow-light);
+}
+
+.card-icon {
+  flex-shrink: 0;
+  font-size: 1.8rem; /* Consistent with group icon */
+  color: var(--primary-purple);
+}
+
+.card-details {
+  flex-grow: 1;
+}
+
+.content-card h3 {
+  font-size: 1.25rem; /* Slightly smaller for balance */
+  margin-bottom: 0.5rem;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.content-summary {
+  font-size: 0.9rem; /* Slightly larger for readability */
+  color: #6B7280; /* Lighter gray for secondary text */
+  line-height: 1.5;
+}
+
+.card-actions {
+  flex-shrink: 0;
+}
+
+.start-button {
+  background-color: var(--secondary-orange);
+  color: #FFFFFF;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 8px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.start-button:hover {
+  background-color: #EA580C; /* Darker orange for hover */
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.start-button:focus {
+  outline: 3px solid var(--focus-blue); /* Accessible focus state */
+  outline-offset: 2px;
+  box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.3);
+}
+
+.start-button .fas {
+  font-size: 0.95rem;
+}
+
+/* No Content Message */
+.no-content-message {
+  grid-column: 1 / -1;
+  text-align: center;
+  padding: 3rem;
+  background-color: var(--light-gray-bg);
+  border-radius: 12px;
+  color: #6B7280;
+  font-size: 1.1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  margin-top: 1.5rem;
+  box-shadow: 0 4px 12px var(--soft-shadow);
+}
+
+.no-content-message .fas {
+  font-size: 2.5rem;
+  color: var(--primary-purple);
+}
+
+/* Status Emoji Styling */
+.status-emoji {
+  font-size: 1.25rem;
+  margin-left: 0.5rem;
+}
+
+/* Status-specific classes */
+.status-completed {
+  color: var(--success-green);
+}
+
+.status-in-progress {
+  color: var(--warning-yellow);
+}
+
+.status-not-started {
+  color: var(--error-red);
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(12px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.animated-fade-in {
+  animation: fadeIn 0.5s ease-out forwards; /* Slightly faster for snappier feel */
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+  .unit-overview-wrapper {
+    padding: 0 1rem;
+  }
+
+  .unit-overview-header h1 {
+    font-size: 2rem;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .level-badge {
+    margin-left: 0;
+    margin-top: 0.5rem;
+    font-size: 1rem;
+  }
+
+  .header-description {
+    font-size: 0.95rem;
+  }
+
+  .group-title {
+    font-size: 1.75rem;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .content-group {
+    padding: 1.5rem;
+  }
+
+  .content-list-grid {
+    grid-template-columns: 1fr; /* Single column for better mobile UX */
+  }
+
+  .content-card {
+    flex-direction: column;
+    text-align: center;
+    padding: 1.5rem;
+    gap: 1rem;
+  }
+
+  .card-details {
+    text-align: center;
+  }
+
+  .card-actions {
+    width: 100%;
+  }
+
+  .start-button {
+    width: 100%;
+    justify-content: center;
+    padding: 12px; /* Larger touch target */
+  }
+}
+
+@media (max-width: 480px) {
+  .unit-overview-wrapper {
+    padding: 0 0.75rem;
+  }
+
+  .unit-overview-header h1 {
+    font-size: 1.75rem;
+  }
+
+  .level-badge {
+    font-size: 0.9rem;
+    padding: 6px 12px;
+  }
+
+  .content-card h3 {
+    font-size: 1.1rem;
+  }
+
+  .start-button {
+    font-size: 0.9rem;
+    padding: 10px;
+  }
+
+  .group-title {
+    font-size: 1.5rem;
+  }
+
+  .no-content-message {
+    font-size: 1rem;
+    padding: 2rem;
+  }
+}

@@ -1,0 +1,223 @@
+<app-header></app-header>
+
+
+
+<!-- Heading -->
+<div class="heading-text"><b>Professor List</b></div>
+
+<!-- Search Section -->
+<div class="search-container">
+  <input 
+    type="text"
+    [(ngModel)]="keyword"
+    (keyup.enter)="search()"
+    placeholder="Search professors..."
+    class="search-input"
+    aria-label="Search Professors"
+  />
+  <button 
+    (click)="search()"
+    class="search-btn"
+    aria-label="Search Button"
+  >
+    Search
+  </button>
+</div>
+
+<!-- Professors List -->
+<div class="row">
+  <div *ngFor="let professor of professors" class="col-4 card" id="professorCard">
+
+    <!-- Professor Image Block -->
+    <div class="img-block">
+      <div class="circle">
+        <img 
+          *ngIf="professor.gender === 'Male' || professor.gender === 'male'" 
+          class="professor-img" 
+          [src]="'/assets/img/maleprofessor.png'" 
+          alt="Male Professor" 
+          width="120" 
+          height="120" 
+        />
+        <img 
+          *ngIf="professor.gender === 'Female' || professor.gender === 'female'" 
+          class="professor-img" 
+          [src]="'/assets/img/femaleprofessor.png'" 
+          alt="Female Professor" 
+          width="120" 
+          height="120" 
+        />
+      </div>
+    </div>
+
+    <div class="card-block">
+        
+        <div class="text">
+          <b class="label">Professor Name: </b>
+          <b class="value" *ngIf="!editingProfessor || editingProfessor.email !== professor.email">{{ professor.professorname }}</b>
+          <input
+            *ngIf="editingProfessor && editingProfessor.email === professor.email"
+            type="text"
+            [(ngModel)]="editingProfessor.professorname"
+            class="edit-input"
+          />
+        </div>
+        <div class="text">
+          <b class="label">Degree Completed: </b>
+          <b class="value" *ngIf="!editingProfessor || editingProfessor.email !== professor.email">{{ professor.degreecompleted }}</b>
+          <input
+            *ngIf="editingProfessor && editingProfessor.email === professor.email"
+            type="text"
+            [(ngModel)]="editingProfessor.degreecompleted"
+            class="edit-input"
+          />
+        </div>
+        <div class="text">
+          <b class="label">Email: </b>
+          <b class="value">{{ professor.email }}</b> 
+        </div>
+        <div class="text">
+          <b class="label">Institution Name: </b>
+          <b class="value" *ngIf="!editingProfessor || editingProfessor.email !== professor.email">{{ professor.institutionname }}</b>
+          <input
+            *ngIf="editingProfessor && editingProfessor.email === professor.email"
+            type="text"
+            [(ngModel)]="editingProfessor.institutionname"
+            class="edit-input"
+          />
+        </div>
+        <div class="text">
+          <b class="label">Department: </b>
+          <b class="value" *ngIf="!editingProfessor || editingProfessor.email !== professor.email">{{ professor.department }}</b>
+          <input
+            *ngIf="editingProfessor && editingProfessor.email === professor.email"
+            type="text"
+            [(ngModel)]="editingProfessor.department"
+            class="edit-input"
+          />
+        </div>
+        <div class="text">
+          <b class="label">Experience: </b>
+          <b class="value" *ngIf="!editingProfessor || editingProfessor.email !== professor.email">{{ professor.experience }} years</b>
+          <input
+            *ngIf="editingProfessor && editingProfessor.email === professor.email"
+            type="number"
+            [(ngModel)]="editingProfessor.experience"
+            class="edit-input"
+          />
+        </div>
+        <div class="text">
+          <b class="label">Gender: </b>
+          <b class="value" *ngIf="!editingProfessor || editingProfessor.email !== professor.email">{{ professor.gender }}</b>
+          <select
+            *ngIf="editingProfessor && editingProfessor.email === professor.email"
+            [(ngModel)]="editingProfessor.gender"
+            class="edit-select"
+          >
+            <option value="Male">Male</option>
+            <option value="Female">Female</option>
+          </select>
+        </div>
+        <div class="text">
+          <b class="label">Mobile: </b>
+          <b class="value" *ngIf="!editingProfessor || editingProfessor.email !== professor.email">{{ professor.mobile }}</b>
+          <input
+            *ngIf="editingProfessor && editingProfessor.email === professor.email"
+            type="text"
+            [(ngModel)]="editingProfessor.mobile"
+            class="edit-input"
+          />
+        </div>
+<div *ngIf="currRole.toLowerCase() === 'admin'">
+  <div class="text">
+    <b class="label">Password: </b>
+
+    <!-- MASKED VIEW -->
+    <b class="value" *ngIf="!editingProfessor || editingProfessor.email !== professor.email">
+      ********
+    </b>
+
+    <!-- EDIT MODE -->
+    <div *ngIf="editingProfessor && editingProfessor.email === professor.email" style="display: flex; align-items: center;">
+      <input
+        [type]="showPasswordFor === professor.email ? 'text' : 'password'"
+        [(ngModel)]="editingProfessor.password"
+        class="edit-input"
+        required
+        pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)[A-Za-z\\d]{8,20}$"
+        title="Password must contain at least one uppercase letter, one lowercase letter, one number, and be 8-20 characters long."
+        placeholder="Enter new password"
+      />
+
+      <!-- Eye toggle button -->
+      <button type="button" class="toggle-btn" (click)="togglePassword(professor.email)" style="margin-left: 8px;">
+        <i class="fas" [ngClass]="showPasswordFor === professor.email ? 'fa-eye-slash' : 'fa-eye'"></i>
+      </button>
+    </div>
+  </div>
+</div>
+
+
+  
+        <div *ngIf="professor.status === ProfessorStatus.APPROVED">
+          <div class="status-btn approved">Approved Professor</div>
+        </div>
+        <div *ngIf="professor.status === ProfessorStatus.REJECTED">
+          <div class="status-btn rejected">Rejected</div>
+        </div>
+        <div *ngIf="professor.status === ProfessorStatus.PENDING">
+          <div class="status-btn pending">Approval Pending</div>
+        </div>
+  
+       <div *ngIf="currRole.toLowerCase() === 'admin'" class="admin-actions">
+  <button
+    *ngIf="!editingProfessor || editingProfessor.email !== professor.email"
+    class="btn-edit"
+    (click)="startEditing(professor)"
+  >
+    Edit
+  </button>
+
+  <button
+    *ngIf="editingProfessor && editingProfessor.email === professor.email"
+    class="btn-save"
+    (click)="saveProfessor()"
+  >
+    Save
+  </button>
+
+  <button
+    *ngIf="editingProfessor && editingProfessor.email === professor.email"
+    class="btn-cancel"
+    (click)="cancelEditing()"
+  >
+    Cancel
+  </button>
+
+  <ng-container *ngIf="confirmDeleteEmail === professor.email; else normalDeleteBtn">
+    <div class="delete-confirmation">
+      <p>Are you sure you want to delete {{ professor.professorname || 'this professor' }}?</p>
+      <button type="button" class="confirm-delete-btn" (click)="deleteProfessor(professor.email)">Confirm</button>
+      <button type="button" class="cancel-delete-btn" (click)="cancelDelete()">Cancel</button>
+    </div>
+  </ng-container>
+
+  <ng-template #normalDeleteBtn>
+    <button
+      *ngIf="!editingProfessor || editingProfessor.email !== professor.email"
+      class="btn-delete"
+      (click)="confirmDelete(professor.email)"
+    >
+      Delete
+    </button>
+  </ng-template>
+</div>
+
+
+      </div>
+  </div>
+</div>
+
+<br><br><br>
+
+<app-footer></app-footer>

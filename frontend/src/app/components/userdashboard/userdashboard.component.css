@@ -1,0 +1,481 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
+@import '~font-awesome/css/font-awesome.css';
+
+/* Sidebar */
+.sidebar {
+  position: fixed;
+  left: 0;
+  top: 0;
+  height: 100%;
+  width: 78px; /* Collapsed width */
+  background: linear-gradient(to bottom, #9c50ed, #8e2de2); /* Gradient matching login */
+  padding: 6px 14px;
+  z-index: 99;
+  transition: width 0.5s ease; /* Smooth width transition */
+}
+
+.sidebar.open {
+  width: 250px; /* Expanded width */
+}
+
+.sidebar .logo-details {
+  height: 60px;
+  display: flex;
+  align-items: center;
+  position: relative;
+}
+
+.sidebar .logo-details .fa-bars {
+  cursor: pointer;
+  color: #ffffff;
+  font-size: 28px;
+  min-width: 50px;
+  text-align: center;
+  line-height: 60px;
+  transition: opacity 0.3s ease;
+}
+
+.sidebar.open .logo-details .fa-bars {
+  opacity: 0; /* Hide when sidebar is open */
+}
+
+.sidebar:not(.open) .logo-details .fa-bars {
+  opacity: 1; /* Visible when closed */
+}
+
+.sidebar .logo-details .logo_name {
+  color: #ffffff;
+  font-size: 20px;
+  font-weight: 600;
+  font-family: 'Poppins', sans-serif;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  display: flex;
+  align-items: center;
+}
+
+.sidebar.open .logo-details .logo_name {
+  opacity: 1;
+}
+
+.sidebar .logo-details .main-logo {
+  margin-right: 10px; /* Space between logo and user image/text */
+}
+
+.sidebar .nav-list {
+  margin-top: 20px;
+  padding-left: 0;
+}
+
+.sidebar li {
+  position: relative;
+  margin: 8px 0;
+  list-style: none;
+}
+
+.sidebar li a {
+  display: flex;
+  height: 50px;
+  width: 100%;
+  border-radius: 12px;
+  align-items: center;
+  text-decoration: none;
+  transition: background 0.4s ease;
+  background: rgba(255, 255, 255, 0.15); /* Glass effect */
+  backdrop-filter: blur(5px);
+}
+
+.sidebar li a:hover {
+  background: #ff7e5f; /* Orange hover, matching login */
+}
+
+.sidebar li a .links_name {
+  color: #ffffff;
+  font-size: 15px;
+  font-weight: 400;
+  font-family: 'Poppins', sans-serif;
+  white-space: nowrap;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.sidebar.open li a .links_name {
+  opacity: 1;
+}
+
+.sidebar li a:hover .links_name,
+.sidebar li a:hover i {
+  color: #ffffff;
+}
+
+.sidebar li i {
+  color: #ffffff;
+  height: 50px;
+  min-width: 50px;
+  font-size: 18px;
+  text-align: center;
+  line-height: 50px;
+}
+
+.sidebar li .tooltip {
+  position: absolute;
+  top: 50%;
+  left: calc(100% + 15px);
+  transform: translateY(-50%);
+  background: #ffffff;
+  color: #333;
+  padding: 6px 12px;
+  border-radius: 4px;
+  font-size: 15px;
+  font-family: 'Poppins', sans-serif;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+}
+
+.sidebar li:hover .tooltip {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.sidebar.open li .tooltip {
+  display: none;
+}
+
+/* Home Section */
+.home-section {
+  position: relative;
+  background: linear-gradient(to right, #f5f5f5, #ffffff); /* Subtle gradient */
+  min-height: 90vh;
+  left: 78px;
+  width: calc(100% - 78px);
+  transition: all 0.5s ease;
+  padding-top: 20px;
+}
+.headtxt {
+  color: #9c50ed; /* Purple from login links */
+  font-weight: 600;
+  font-family: 'Poppins', sans-serif;
+  font-size: 40px;
+  margin: 0 0 1% 1%; /* Adjust the 10% to move it left or right */
+  text-align: center;
+}
+
+.sidebar.open ~ .home-section {
+  left: 250px;
+  width: calc(100% - 250px);
+}
+
+.container {
+  margin-left: 5%;
+  margin-top: 2%;
+}
+
+/* Dashboard Cards */
+
+
+.circle {
+  border-radius: 50%;
+  width: 80px;
+  height: 80px;
+  float: right;
+  background: #ff7e5f; /* Orange, matching login */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#icons {
+  font-size: 3.5em;
+  color: #ffffff;
+}
+
+.text {
+  font-family: 'Poppins', sans-serif;
+  font-size: 35px;
+  font-weight: 600;
+  color: #333;
+}
+
+.sub-text {
+  font-family: 'Poppins', sans-serif;
+  font-size: 18px;
+  color: #730202; /* Dark red from login errors */
+}
+
+
+
+
+
+
+
+h1, h2, h3 {
+  color: #333;
+}
+
+.profile-section {
+  background: #f5f5f5;
+  padding: 20px;
+  border-radius: 8px;
+  margin-bottom: 20px;
+}
+
+.profile-details p {
+  margin: 10px 0;
+}
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 12px;
+  border-radius: 20px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  margin: 5px;
+  background-color: #eee;
+  color: #333;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.badge:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+}
+
+.badge i {
+  font-size: 1rem;
+}
+
+/* Specific Colors for Each Badge */
+.badge.bronze {
+  background-color: #cd7f32;
+  color: #fff;
+}
+
+.badge.silver {
+  background-color: #c0c0c0;
+  color: #333;
+}
+
+.badge.gold {
+  background-color: #ffd700;
+  color: #333;
+}
+
+.badge.platinum {
+  background-color: #e5e4e2;
+  color: #333;
+}
+
+.badge.diamond {
+  background-color: #b9f2ff;
+  color: #0a0a0a;
+}
+
+.badge.master {
+  background-color: #6a0dad;
+  color: #fff;
+}
+.badge.legend {
+  background: linear-gradient(45deg, #f39c12, #f1c40f); /* bright gold/yellow gradient */
+  color: #fff;
+  font-weight: bold;
+  border-radius: 12px;
+  padding: 6px 12px;
+  box-shadow: 0 0 8px rgba(241, 196, 15, 0.8);
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+
+
+.progress-section {
+  margin-bottom: 20px;
+}
+
+.level-card {
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 15px;
+  margin-bottom: 15px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.level-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.level-header h3 {
+  margin: 0;
+}
+
+.progress-bar {
+  background: #e0e0e0;
+  height: 10px;
+  border-radius: 5px;
+  overflow: hidden;
+  margin-bottom: 10px;
+}
+
+.progress-fill {
+  background: #007bff;
+  height: 100%;
+  transition: width 0.3s ease;
+}
+
+.level-actions {
+  display: flex;
+  gap: 10px;
+}
+
+.level-actions button {
+  padding: 8px 16px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 0.9em;
+}
+
+.level-actions button:first-child {
+  background: #007bff;
+  color: white;
+}
+
+.level-actions button:last-child {
+  background: #28a745;
+  color: white;
+}
+
+.level-actions button:disabled {
+  background: #ccc;
+  cursor: not-allowed;
+}
+
+.quiz-section {
+  background: #f5f5f5;
+  padding: 20px;
+  border-radius: 8px;
+}
+
+.quiz-attempts {
+  display: grid;
+  gap: 10px;
+}
+
+.attempt-card {
+  background: white;
+  padding: 10px;
+  border-radius: 4px;
+  border: 1px solid #ddd;
+}
+
+.attempt-card p {
+  margin: 5px 0;
+}
+
+@media (max-width: 768px) {
+  
+
+  .level-actions {
+    flex-direction: column;
+  }
+
+  .level-actions button {
+    width: 100%;
+  }
+}
+
+
+.dashboard-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 20px;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.dashboard-card {
+  flex: 1 1 calc(33% - 20px); /* 3 cards per row with gap */
+  min-width: 250px;
+  background: rgba(255, 255, 255, 0.15);
+  border-radius: 16px;
+  padding: 25px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  transition: all 0.3s ease;
+  color: #333;
+}
+
+.dashboard-card:hover {
+  transform: translateY(-5px);
+  background: linear-gradient(to right, #ff9966, #ff5e62);
+  color: #fff;
+}
+
+.circle {
+  width: 50px;
+  height: 50px;
+  background: #ff9966;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 15px;
+  color: white;
+  font-size: 20px;
+}
+
+.text {
+  font-size: 20px;
+  font-weight: 600;
+  margin-bottom: 8px;
+}
+
+.sub-text {
+  font-size: 16px;
+}
+
+.badge {
+  display: inline-block;
+  background-color: #8b80ff;
+  color: #333;
+  padding: 5px 10px;
+  border-radius: 8px;
+  margin: 3px;
+  font-size: 14px;
+}
+
+.quiz-completed-badge {
+  display: inline-block;
+  background-color: #e6f4ea;
+  color: #2e7d32;
+  font-weight: 500;
+  padding: 4px 10px;
+  border-radius: 20px;
+  font-size: 0.9rem;
+  margin-left: 8px;
+  box-shadow: 0 0 3px rgba(0, 0, 0, 0.1);
+  transition: background-color 0.3s ease;
+}
+
+.quiz-completed-badge:hover {
+  background-color: #d0ebda;
+}
+
+
+
+
+
+
+

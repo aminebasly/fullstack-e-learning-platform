@@ -1,0 +1,8 @@
+.loading-spinner {
+    text-align: center;
+    padding: 20px;
+    color: #fff; /* White text to contrast with dark overlay */
+    font-size: 20px;
+    background: rgba(0, 0, 0, 0.7); /* Optional: Darker box around text */
+    border-radius: 5px;
+  }

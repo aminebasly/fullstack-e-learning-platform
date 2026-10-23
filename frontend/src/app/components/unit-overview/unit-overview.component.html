@@ -1,0 +1,119 @@
+<app-header></app-header>
+<div class="back-button-container">
+  <button class="back-to-units-button" (click)="goBackToUnits()">
+    <i class="fas fa-arrow-left"></i> Back to Level Overview
+  </button>
+</div>
+
+
+<div class="unit-overview-wrapper">
+  <div class="unit-overview-header">
+    <h1>
+      <i class="fas fa-book-open"></i> Unit {{ unitNumber }}
+      <span class="level-badge">Level {{ level }}</span>
+    </h1>
+    <p class="header-description">
+      Dive into the exciting content of this unit and enhance your skills!
+    </p>
+  </div>
+
+  <div class="content-groups">
+    <ng-container *ngIf="contentList && contentList.length > 0; else noContent">
+
+      <section class="content-group video-group">
+        <h2 class="group-title">
+          <i class="fas fa-video group-icon"></i> Video Lessons
+        </h2>
+        <div class="content-list-grid">
+          <ng-container *ngFor="let content of contentList">
+            <div *ngIf="content.type === 'VIDEO'" class="content-card animated-fade-in">
+              <div class="card-icon">
+                <i class="fas fa-video"></i>
+              </div>
+              <div class="card-details">
+                <h3>
+                  {{ getDisplayType(content.type) }} {{ content.contentNumber }}
+                  <span class="status-emoji">{{ getStatusEmoji(content.status) }}</span>
+                </h3>
+                <p class="content-summary">
+                  Watch engaging videos to grasp key concepts.
+                </p>
+              </div>
+              <div class="card-actions">
+                <button (click)="goToContent(content.id)" class="start-button">
+                  <i class="fas fa-play-circle"></i> Start Lesson
+                </button>
+              </div>
+            </div>
+          </ng-container>
+        </div>
+      </section>
+
+      <section class="content-group listening-group">
+        <h2 class="group-title">
+          <i class="fas fa-headphones-alt group-icon"></i> Listening Exercises
+        </h2>
+        <div class="content-list-grid">
+          <ng-container *ngFor="let content of contentList">
+            <div *ngIf="content.type === 'LISTENING'" class="content-card animated-fade-in">
+              <div class="card-icon">
+                <i class="fas fa-headphones-alt"></i>
+              </div>
+              <div class="card-details">
+                <h3>
+                  {{ getDisplayType(content.type) }} {{ content.contentNumber }}
+                  <span class="status-emoji">{{ getStatusEmoji(content.status) }}</span>
+                </h3>
+                <p class="content-summary">
+                  Sharpen your listening comprehension skills.
+                </p>
+              </div>
+              <div class="card-actions">
+                <button (click)="goToContent(content.id)" class="start-button">
+                  <i class="fas fa-play-circle"></i> Start Exercise
+                </button>
+              </div>
+            </div>
+          </ng-container>
+        </div>
+      </section>
+
+      <section class="content-group grammar-group">
+        <h2 class="group-title">
+          <i class="fas fa-language group-icon"></i> Grammar Practice
+        </h2>
+        <div class="content-list-grid">
+          <ng-container *ngFor="let content of contentList">
+            <div *ngIf="content.type === 'GRAMMAR'" class="content-card animated-fade-in">
+              <div class="card-icon">
+                <i class="fas fa-language"></i>
+              </div>
+              <div class="card-details">
+                <h3>
+                  {{ getDisplayType(content.type) }} {{ content.contentNumber }}
+                  <span class="status-emoji">{{ getStatusEmoji(content.status) }}</span>
+                </h3>
+                <p class="content-summary">
+                  Master grammar rules with interactive practices.
+                </p>
+              </div>
+              <div class="card-actions">
+                <button (click)="goToContent(content.id)" class="start-button">
+                  <i class="fas fa-play-circle"></i> Start Practice
+                </button>
+              </div>
+            </div>
+          </ng-container>
+        </div>
+      </section>
+
+    </ng-container>
+    <ng-template #noContent>
+      <div class="no-content-message">
+        <i class="fas fa-info-circle"></i> No content available for this unit yet. Check back soon!
+      </div>
+    </ng-template>
+  </div>
+</div>
+
+<app-footer></app-footer>

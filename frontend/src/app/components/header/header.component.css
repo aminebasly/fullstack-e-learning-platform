@@ -1,0 +1,100 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
+@import '~font-awesome/css/font-awesome.css';
+
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
+@import '~font-awesome/css/font-awesome.css';
+
+/* Sidebar Logo (Header) */
+.sidebar-logo {
+  padding: 15px 30px;
+  font-size: 20px;
+  background: linear-gradient(to right, #9c50ed, #e0b836); /* Matching login gradient */
+  color: #ffffff;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3); /* Subtle shadow for depth */
+}
+
+/* Welcome Text */
+.welcometxt {
+  font-family: 'Poppins', sans-serif;
+  font-weight: 600;
+  font-size: 24px;
+  color: #ffffff;
+  text-transform: uppercase;
+}
+
+/* User Actions Container */
+.user-actions {
+  display: flex;
+  align-items: center;
+  gap: 10px; /* Space between elements */
+}
+
+/* Sidebar Text (Logged User) */
+.sidebar-text {
+  font-size: medium;
+  font-family: 'Poppins', sans-serif;
+  color: #ffffff;
+  padding: 8px 15px; /* Match button padding for consistency */
+ 
+  border-radius: 12px; /* Rounded like buttons */
+}
+
+/* Logout and Home Buttons */
+.logoutbtn {
+  border: none;
+  background: rgba(255, 255, 255, 0.15); /* Glass effect */
+  backdrop-filter: blur(5px);
+  color: #ffffff;
+  border-radius: 12px;
+  padding: 8px 15px;
+  font-size: medium;
+  font-family: 'Poppins', sans-serif;
+  cursor: pointer;
+  transition: background 0.3s, transform 0.2s;
+}
+
+.logoutbtn:hover {
+  background: #ff7e5f; /* Orange on hover, matching login buttons */
+  transform: scale(1.05); /* Slight scale effect */
+}
+
+/* Ensure icons align properly */
+.fa {
+  margin-right: 5px;
+}
+
+/* Content Container (if used elsewhere) */
+.content-container {
+  padding-top: 20px;
+}
+
+
+/* Style for the sidebar-logo container */
+.sidebar-logo {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 20px;
+  background: linear-gradient(to right, #9c50ed, #e0b836); /* Matching gradient */
+  color: #ffffff;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+}
+
+/* Style for the logo image */
+.sidebar-logo .logo {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%; /* Optional: Make the image circular */
+  margin-right: 15px; /* Space between the image and the text */
+  object-fit: cover; /* Ensure the image fits within the circle */
+}
+
+/* Style for the user-actions container */
+.user-actions {
+  display: flex;
+  align-items: center;
+  gap: 10px; /* Space between buttons and text */
+}

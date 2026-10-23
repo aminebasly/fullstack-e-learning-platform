@@ -1,0 +1,94 @@
+<app-header></app-header>
+<br>
+
+<div class="level-overview-container">
+  <!-- Summary -->
+  <div class="summary-banner animate-in" *ngIf="unitProgressList.length">
+    <h3>📘 You are currently at Level {{ currentLevel }} — Keep going!</h3>
+  </div>
+  <br>
+
+<h2 class="section-title animate-in">
+  <span style="font-size:2.2rem; vertical-align: middle;">🌟</span>
+  Level Overview
+</h2>  <br><br>
+
+  <!-- Resume Box -->
+  <div
+    class="resume-box animate-in"
+    *ngIf="lastContentVisited?.level === currentLevel || nextContent; else loadingResume"
+    @fadeIn
+  >
+    <h3>Resume Where You Left Off</h3>
+    <p>
+      Next: <span class="highlight">
+        {{ (lastContentVisited?.level === currentLevel ? lastContentVisited : nextContent)?.type || 'Content' }}
+      </span> - Unit
+      {{ (lastContentVisited?.level === currentLevel ? lastContentVisited : nextContent)?.unitNumber || 'N/A' }}
+    </p>
+    <button class="resume-button" (click)="resumeContent()">Resume</button>
+  </div>
+  <ng-template #loadingResume>
+    <div class="resume-box loading-skeleton animate-pulse" aria-hidden="true">
+      <div class="skeleton-title"></div>
+      <div class="skeleton-text"></div>
+      <div class="skeleton-button"></div>
+    </div>
+  </ng-template>
+  <br>
+
+  <!-- CTA -->
+  <div class="cta-banner animate-in" *ngIf="isAllUnitsNotStarted()" @fadeIn>
+    <h4>Ready to start your learning journey?</h4>
+    <button class="resume-button" (click)="goToUnit(1)">Start Unit 1</button>
+  </div>
+  <br><br><br>
+
+  <!-- Units Grid -->
+  <div class="units-grid" *ngIf="unitProgressList.length; else loadingGrid">
+    <div
+      class="unit-card animate-in"
+      *ngFor="let unit of unitProgressList; index as i"
+      @cardAnimation
+      [@cardAnimation]="{ value: '', params: { delay: i * 100 + 'ms' } }"
+    >
+      <h3>🎯Unit {{ unit.unitNumber }}</h3>
+      <p>{{ unit.completedContentCount }} / {{ unit.totalContentCount }} Completed</p>
+      <div
+        class="progress-bar-container"
+        role="progressbar"
+        [attr.aria-valuenow]="getProgressPercent(unit)"
+        aria-valuemin="0"
+        aria-valuemax="100"
+      >
+        <div class="progress-bar-fill" [style.width.%]="getProgressPercent(unit)"></div>
+      </div>
+      <span
+        class="badge"
+        [ngClass]="{
+          'badge-complete': unit.completedContentCount === unit.totalContentCount,
+          'badge-in-progress': unit.completedContentCount > 0 && unit.completedContentCount < unit.totalContentCount,
+          'badge-not-started': unit.completedContentCount === 0
+        }"
+      >
+        {{ getUnitStatus(unit) }}
+      </span>
+      <button class="unit-button" (click)="goToUnit(unit.unitNumber)">Go to Unit</button>
+    </div>
+  </div>
+
+  <ng-template #loadingGrid>
+    <div class="units-grid">
+      <div class="unit-card loading-skeleton animate-pulse" *ngFor="let i of [1,2,3]">
+        <div class="skeleton-icon"></div>
+        <div class="skeleton-title"></div>
+        <div class="skeleton-text"></div>
+        <div class="skeleton-progress"></div>
+        <div class="skeleton-button"></div>
+      </div>
+    </div>
+  </ng-template>
+</div>
+
+<br><br><br><br><br>
+<app-footer></app-footer>

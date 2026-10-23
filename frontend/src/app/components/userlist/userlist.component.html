@@ -1,0 +1,332 @@
+<app-header></app-header>
+
+<div class="heading-text">User List</div>
+<!-- Champ de recherche -->
+<div class="search-container">
+  <input
+    type="text"
+    class="search-input"
+    placeholder="Rechercher un utilisateur par nom ou email..."
+    [(ngModel)]="searchTerm"
+    (ngModelChange)="search($event)"
+  />
+</div>
+
+<div *ngIf="isLoading" class="loading-text">Loading users...</div>
+
+<div class="user-list" *ngIf="!isLoading && users.length > 0; else noUsers">
+  <div *ngFor="let user of users" class="user-card">
+    <div class="user-img-container">
+      <img
+        *ngIf="user.gender.toLowerCase() === 'male'; else femaleImage"
+        class="user-img"
+        src="/assets/img/maleuser.png"
+        alt="Male User"
+      />
+      <ng-template #femaleImage>
+        <img class="user-img" src="/assets/img/femaleuser.png" alt="Female User" />
+      </ng-template>
+    </div>
+
+    <div class="user-info">
+      <form #userForm="ngForm" (ngSubmit)="saveUser(userForm)">
+        <!-- Username -->
+        <div class="user-text">
+          <span class="label">Username:</span>
+          <ng-container *ngIf="editingEmail === user.email; else viewUsername">
+            <input
+              type="text"
+              class="form-control"
+              placeholder="Enter user name"
+              [(ngModel)]="editableUser.username"
+              name="username_{{user.email}}"
+              required
+              pattern=".{5,10}"
+              #username="ngModel"
+              [class.is-invalid]="username.invalid && username.touched"
+            />
+            <small class="text-danger" [class.d-none]="username.valid || username.untouched"><b>Required field</b></small>
+            <small class="text-danger" *ngIf="username.errors?.pattern && username.touched">
+              <b>Username must be between 5 and 10 characters.</b>
+            </small>
+          </ng-container>
+          <ng-template #viewUsername>
+            <b>{{ user.username || 'N/A' }}</b>
+          </ng-template>
+        </div>
+
+        
+
+        <!-- Email (non-editable) -->
+        <div class="user-text"><span class="label">Email:</span> {{ user.email || 'N/A' }}</div>
+
+        <!-- Profession -->
+        <div class="user-text">
+          <span class="label">Profession:</span>
+          <ng-container *ngIf="editingEmail === user.email; else viewProfession">
+            <select
+              class="form-control"
+              [(ngModel)]="editableUser.profession"
+              name="profession_{{user.email}}"
+              required
+              #profession="ngModel"
+              [class.is-invalid]="profession.invalid && profession.touched"
+            >
+              <option value="" disabled selected>Select Profession</option>
+              <option value="Student">Student</option>
+              <option value="Engineer">Engineer</option>
+              <option value="Doctor">Doctor</option>
+              <option value="Other">Other</option>
+            </select>
+            <small class="text-danger" *ngIf="profession.invalid && profession.touched">
+              <b>Please select a profession</b>
+            </small>
+          </ng-container>
+          <ng-template #viewProfession>
+            {{ user.profession || 'N/A' }}
+          </ng-template>
+        </div>
+
+        <!-- Gender -->
+        <div class="user-text">
+          <span class="label">Gender:</span>
+          <ng-container *ngIf="editingEmail === user.email; else viewGender">
+            <div class="d-flex gap-3 mb-3">
+              <div class="form-check">
+                <input
+                  class="form-check-input"
+                  type="radio"
+                  name="gender_{{user.email}}"
+                  id="male_{{user.email}}"
+                  value="Male"
+                  [(ngModel)]="editableUser.gender"
+                  required
+                  #gender="ngModel"
+                  [class.is-invalid]="gender.invalid && gender.touched"
+                />
+                <label class="form-check-label" [attr.for]="'male_' + user.email">Male</label>
+              </div>
+              <div class="form-check">
+                <input
+                  class="form-check-input"
+                  type="radio"
+                  name="gender_{{user.email}}"
+                  id="female_{{user.email}}"
+                  value="Female"
+                  [(ngModel)]="editableUser.gender"
+                  required
+                />
+                <label class="form-check-label" [attr.for]="'female_' + user.email">Female</label>
+              </div>
+            </div>
+            <small class="text-danger" *ngIf="gender.invalid && gender.touched">Please select a gender</small>
+          </ng-container>
+          <ng-template #viewGender>
+            {{ user.gender || 'N/A' }}
+          </ng-template>
+        </div>
+
+        <!-- Mobile -->
+        <div class="user-text">
+          <span class="label">Mobile:</span>
+          <ng-container *ngIf="editingEmail === user.email; else viewMobile">
+            <input
+              type="tel"
+              class="form-control"
+              placeholder="Enter mobile"
+              [(ngModel)]="editableUser.mobile"
+              name="mobile_{{user.email}}"
+              required
+              minlength="10"
+              maxlength="10"
+              pattern="^[0-9]{10}$"
+              #mobile="ngModel"
+              [class.is-invalid]="mobile.invalid && mobile.touched"
+            />
+            <small class="text-danger" [class.d-none]="mobile.valid || mobile.untouched"><b>Required field</b></small>
+            <small class="text-danger" *ngIf="(mobile.errors?.minlength || mobile.errors?.maxlength || mobile.errors?.pattern) && mobile.touched">
+              <b>Mobile must be exactly 10 digits</b>
+            </small>
+          </ng-container>
+          <ng-template #viewMobile>
+            {{ user.mobile || 'N/A' }}
+          </ng-template>
+        </div>
+
+        <!-- Address -->
+        <div class="user-text">
+          <span class="label">Address:</span>
+          <ng-container *ngIf="editingEmail === user.email; else viewAddress">
+            <input
+              type="text"
+              class="form-control"
+              placeholder="Enter address"
+              [(ngModel)]="editableUser.address"
+              name="address_{{user.email}}"
+              required
+              #address="ngModel"
+              [class.is-invalid]="address.invalid && address.touched"
+            />
+            <small class="text-danger" [class.d-none]="address.valid || address.untouched"><b>Required field</b></small>
+          </ng-container>
+          <ng-template #viewAddress>
+            {{ user.address || 'N/A' }}
+          </ng-template>
+        </div>
+
+        <!-- Password -->
+        <div class="user-text password-row">
+          <span class="label">Password:</span>
+          <ng-container *ngIf="editingEmail === user.email; else viewPassword">
+            <div class="password-input-container">
+              <input
+                type="{{ showPasswordFor === user.email ? 'text' : 'password' }}"
+                class="form-control"
+                placeholder="Enter password"
+                [(ngModel)]="editableUser.password"
+                name="password_{{user.email}}"
+                required
+                pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,20}$"
+                #password="ngModel"
+                [class.is-invalid]="password.invalid && password.touched"
+              />
+              <button type="button" class="toggle-btn" (click)="togglePassword(user.email)">
+                <i class="fas" [ngClass]="showPasswordFor === user.email ? 'fa-eye-slash' : 'fa-eye'"></i>
+              </button>
+            </div>
+            <small class="text-danger" [class.d-none]="password.valid || password.untouched"><b>Required field</b></small>
+            <small class="text-danger" *ngIf="password.errors?.pattern && password.touched">
+              <b>Password must contain at least one uppercase letter, one lowercase letter, one number, and be between 8 and 20 characters long.</b>
+            </small>
+            <small class="hint">At least one uppercase, numeric digit, lowercase, 8-20 characters</small>
+          </ng-container>
+          <ng-template #viewPassword>
+            <span *ngIf="showPasswordFor !== user.email">••••••••</span>
+            <span *ngIf="showPasswordFor === user.email">{{ user.password || 'N/A' }}</span>
+            <button type="button" class="toggle-btn" (click)="togglePassword(user.email)">
+              {{ showPasswordFor === user.email ? 'Hide' : 'Show' }}
+            </button>
+          </ng-template>
+        </div>
+
+        
+
+        <!-- Access Type -->
+<div class="user-text">
+  <span class="label">Access Type:</span>
+  <ng-container *ngIf="editingEmail === user.email; else viewAccessType">
+    <select
+      class="form-control"
+      [(ngModel)]="editableUser.accessType"
+      name="accessType_{{user.email}}"
+      required
+      #accessType="ngModel"
+      [class.is-invalid]="accessType.invalid && accessType.touched"
+    >
+      <option value="" disabled>Select Access Type</option>
+      <option value="Full">Full</option>
+      <option value="Single">Single</option>
+      <option value="None">None</option>
+    </select>
+    <small class="text-danger" *ngIf="accessType.invalid && accessType.touched">
+      <b>Please select an access type</b>
+    </small>
+  </ng-container>
+  <ng-template #viewAccessType>
+    <span [ngClass]="user.accessType === 'Full' ? 'status-full' : user.accessType === 'Single' ? 'status-single' : 'status-none'">
+      {{ user.accessType || 'None' }}
+    </span>
+  </ng-template>
+</div>
+
+<!-- Purchased Levels (only for Single access, hidden for Full access) -->
+<div class="user-text" *ngIf="user.accessType !== 'Full' || editingEmail === user.email">
+  <span class="label">Purchased Levels:</span>
+
+  <!-- EDIT MODE & accessType === Single -->
+  <ng-container *ngIf="editingEmail === user.email && user.accessType === 'Single'; else viewPurchasedLevels">
+    <div class="checkbox-group">
+      <label *ngFor="let level of availableLevels" class="checkbox-label">
+        <input
+          type="checkbox"
+          [value]="level"
+          [checked]="editablePurchasedLevels.includes(level)"
+          (change)="onCheckboxChange($event)"
+        />
+        {{ level }}
+      </label>
+    </div>
+    <small class="hint">Select purchased levels</small>
+  </ng-container>
+
+  <!-- VIEW MODE or non-single access -->
+  <ng-template #viewPurchasedLevels>
+    <div *ngIf="user.accessType !== 'Full'; else hidePurchasedLevels" class="level-tags">
+      <span class="level-tag" *ngFor="let level of getPurchasedLevels(user)">
+        {{ level }}
+      </span>
+      <span *ngIf="!user.purchasedLevel">N/A</span>
+    </div>
+  </ng-template>
+
+  <ng-template #hidePurchasedLevels></ng-template>
+</div>
+
+
+
+     <!-- Current Level -->
+<div class="user-text">
+  <span class="label">Current Level:</span>
+  <ng-container *ngIf="editingEmail === user.email; else viewLevel">
+    <select
+      class="form-control"
+      [(ngModel)]="editableUser.currentLevel"
+      name="currentLevel_{{user.email}}"
+      required
+      #currentLevel="ngModel"
+      [class.is-invalid]="currentLevel.invalid && currentLevel.touched"
+    >
+      <option value="" disabled>Select Level</option>
+      <option *ngFor="let lvl of ['A1', 'A2', 'B1', 'B2', 'C1', 'C2']" [value]="lvl">{{ lvl }}</option>
+    </select>
+    <small class="text-danger" [class.d-none]="currentLevel.valid || currentLevel.untouched"><b>Required field</b></small>
+  </ng-container>
+  <ng-template #viewLevel>
+    {{ user.currentLevel || 'N/A' }}
+  </ng-template>
+</div>
+
+        
+
+       
+
+
+        <div class="user-actions">
+          <ng-container *ngIf="editingEmail === user.email; else viewActions">
+            <button type="submit" class="save-btn" [disabled]="userForm.invalid">Save</button>
+            <button type="button" class="cancel-btn" (click)="cancelEdit()">Cancel</button>
+          </ng-container>
+          <ng-template #viewActions>
+            <button class="edit-user-btn" (click)="editUser(user)">Edit</button>
+            <button class="delete-btn" (click)="confirmDelete(user.email)">Delete</button>
+          </ng-template>
+          
+          <!-- Delete Confirmation -->
+          <ng-container *ngIf="confirmDeleteEmail === user.email">
+            <div class="delete-confirmation">
+              <p>Are you sure you want to delete {{ user.username || 'this user' }}?</p>
+              <button type="button" class="confirm-delete-btn" (click)="deleteUser(user.email)">Confirm</button>
+              <button type="button" class="cancel-delete-btn" (click)="cancelDelete()">Cancel</button>
+            </div>
+          </ng-container>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<ng-template #noUsers>
+  <div class="no-users">No users found.</div>
+</ng-template>
+
+<app-footer></app-footer>

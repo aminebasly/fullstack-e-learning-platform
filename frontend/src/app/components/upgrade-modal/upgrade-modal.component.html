@@ -1,0 +1,15 @@
+<!-- upgrade-modal.component.html -->
+<div *ngIf="isOpen" class="wrapper">
+  <div class="modal-overlay">
+    <div class="modal-content">
+      <h3 class="modal-title">Upgrade to {{ targetLevel }} Level</h3>
+      <p class="modal-message">
+        Unlock exclusive content for level {{ targetLevel }} to continue your learning journey!
+      </p>
+      <div class="button-group">
+        <button class="upgrade-btn" (click)="upgrade()">Upgrade Now</button>
+        <button class="cancel-btn" (click)="closeModal()">Cancel</button>
+      </div>
+    </div>
+  </div>
+</div>

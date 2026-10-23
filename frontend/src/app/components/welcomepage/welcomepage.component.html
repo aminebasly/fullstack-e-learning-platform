@@ -1,0 +1,270 @@
+<!-- Navbar Start -->
+<nav class="navbar navbar-expand-lg bg-white navbar-light shadow sticky-top p-0" style="font-family: 'Poppins', sans-serif;">
+  <a class="navbar-brand d-flex align-items-center px-4 px-lg-5" [routerLink]="['/']">
+    <img src="/assets/img/English-Star.jpg" alt="Logo" style="width: 40px; height: 40px; margin-right: 8px;">
+    <h2 class="m-0"><span style="color: #ffa500;">English</span> <span style="color: purple;">Star</span></h2>
+  </a>
+  <button class="navbar-toggler me-4" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarCollapse">
+    <div class="navbar-nav ms-auto p-4 p-lg-0">
+      <a class="nav-item nav-link active" [routerLink]="['/']">Home</a>
+      <a class="nav-item nav-link" href="#about-us">About Us </a>
+      <a class="nav-item nav-link" [routerLink]="['/login']">Login</a>
+      
+      
+    </div>
+    <a [routerLink]="['/registration']" class="btn py-4 px-lg-5 d-none d-lg-block" style="background-color: #fd7e14; border: none; color: #fff;">
+      CREATE ACCOUNT <i class="fa fa-arrow-right ms-3"></i>
+    </a>
+  </div>
+</nav>
+<!-- Navbar End -->
+
+<!-- Hero Section Start -->
+<div class="container-fluid bg-light py-5" style="font-family: 'Poppins', sans-serif;">
+  <div class="container py-5">
+    <div class="row align-items-center">
+      <!-- Text Section -->
+      <div class="col-lg-6">
+        <h5 class="text-uppercase mb-3" style="color: #fd7e14;">Best Online Courses</h5>
+        <h1 class="display-4 mb-4" style="color: #1a1a1a;">The Best Online Learning Platform</h1>
+        <p class="fs-5 text-secondary mb-4">
+          Learn anywhere, anytime with our engaging and effective e-learning platform built for students and professionals.
+        </p>
+        <a href="#about-us" class="btn me-3" style="background-color: #6f42c1; color: #fff;">Read More</a>
+        <a [routerLink]="['/registration']" class="btn" style="background-color: #fd7e14; color: #fff;">Join Now</a>
+      </div>
+
+      <!-- Dynamic Image Section -->
+      <div class="col-lg-6 text-center position-relative">
+        <!-- Decorative Shape -->
+        <div style="
+          position: absolute;
+          top: -20px;
+          left: 50%;
+          transform: translateX(-50%);
+          width: 320px;
+          height: 320px;
+          background: radial-gradient(circle at center, #fd7e14 20%, transparent 70%);
+          border-radius: 50%;
+          z-index: 0;
+          opacity: 0.1;">
+        </div>
+
+        <!-- Animated Image -->
+        <!-- Animated Image with Better Frame -->
+         
+<div class="image-frame-wrapper position-relative">
+  <img
+    src="/assets/img/carousel-1.jpg"
+    alt="Student"
+    class="img-fluid styled-image floating-image"
+  >
+</div>
+
+  </div>
+  </div>
+  </div>
+</div>
+
+<!-- Floating Animation CSS -->
+<style>
+  .floating-image {
+    animation: float 4s ease-in-out infinite;
+  }
+
+  @keyframes float {
+    0%, 100% {
+      transform: translateY(0px);
+    }
+    50% {
+      transform: translateY(-10px);
+    }
+  }
+</style>
+<!-- Hero Section End -->
+
+
+
+
+<br>
+<!-- Service Start -->
+<div class="container-xxl py-5">
+  <div class="container">
+    <div class="row g-4">
+      <div class="col-lg-3 col-sm-6 wow fadeInUp" data-wow-delay="0.1s">
+        <div class="service-item text-center pt-3">
+          <div class="p-4">
+            <i class="fa fa-3x fa-graduation-cap mb-4" style="color: #6f42c1;"></i>
+            <h5 class="mb-3">Skill Assessment</h5>
+            <p>Take an initial placement test to identify your proficiency level and start your customized learning journey.</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-3 col-sm-6 wow fadeInUp" data-wow-delay="0.3s">
+        <div class="service-item text-center pt-3">
+          <div class="p-4">
+            <i class="fa fa-3x fa-globe mb-4" style="color: #6f42c1;"></i>
+            <h5 class="mb-3">Engaging Content</h5>
+            <p>Explore units featuring interactive videos, listening activities, and grammar lessons, each with targeted questions.</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-3 col-sm-6 wow fadeInUp" data-wow-delay="0.5s">
+        <div class="service-item text-center pt-3">
+          <div class="p-4">
+            <i class="fa fa-3x fa-home mb-4" style="color: #6f42c1;"></i>
+            <h5 class="mb-3">Structured Levels</h5>
+            <p>Advance through carefully designed levels, gaining access to new units as you build your skills.</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-3 col-sm-6 wow fadeInUp" data-wow-delay="0.7s">
+        <div class="service-item text-center pt-3">
+          <div class="p-4">
+            <i class="fa fa-3x fa-book-open mb-4" style="color: #6f42c1;"></i>
+            <h5 class="mb-3">Mastery Quizzes</h5>
+            <p>Pass comprehensive quizzes to demonstrate your knowledge and unlock the next level of your learning path.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Service End -->
+
+
+<section id="about" class="about about-bg">
+  <div class="about-container">
+    <div class="subtext1" id="subtext1">
+      <span class="counter">01</span> &nbsp; Placement Test
+      <i class="fa fa-caret-down"></i>
+    </div>
+    <div class="innertext1" id="innertext1">
+      Start with a quick placement test to find your CEFR level (A1–C2) and begin learning from the right point for you.
+    </div>
+  </div>
+
+  <div class="about-container">
+    <div class="subtext1" id="subtext2">
+      <span class="counter">02</span> &nbsp; Unlock Units
+      <i class="fa fa-caret-down"></i>
+    </div>
+    <div class="innertext1" id="innertext2">
+      Each level gives access to multiple units. Each unit includes listening, grammar, and video lessons with interactive questions.
+    </div>
+  </div>
+
+  <div class="about-container">
+    <div class="subtext1" id="subtext3">
+      <span class="counter">03</span> &nbsp; Learn & Practice
+      <i class="fa fa-caret-down"></i>
+    </div>
+    <div class="innertext1" id="innertext3">
+      Learn through <b style="color: darkmagenta;">videos</b>, <b style="color: darkmagenta;">audio clips</b>, and <b style="color: darkmagenta;">grammar chapters</b>. Take notes, download materials, and practice anytime.
+    </div>
+  </div>
+
+  <div class="about-container">
+    <div class="subtext1" id="subtext4">
+      <span class="counter">04</span> &nbsp; Pass the Quiz
+      <i class="fa fa-caret-down"></i>
+    </div>
+    <div class="innertext1" id="innertext4">
+      After each unit, take a final quiz. Score 70% or more to unlock the next level and keep progressing!
+    </div>
+  </div>
+
+  <br><br><br><br>
+
+  <img class="automation" src="/assets/img/portalimg.jpg" width="470" height="470" alt="Portal Animation">
+</section>
+
+
+<div id="about-us" class="container-xxl py-5">
+  <div class="container">
+    <div class="row g-5">
+      <div class="col-lg-6 wow fadeInUp" data-wow-delay="0.1s" style="min-height: 400px;">
+        <div class="position-relative h-100">
+          <img class="img-fluid position-absolute w-100 h-100" src="/assets/img/about.jpg" alt="About Us Image" style="object-fit: cover;">
+        </div>
+      </div>
+      <div class="col-lg-6 wow fadeInUp" data-wow-delay="0.3s">
+        <!-- Updated Title -->
+        <h1 class="about-title">About Us</h1>
+        <h2 class="mb-4">Welcome to English Star</h2>
+        <p class="mb-4">Discover a dynamic e-learning platform designed to elevate your English skills through personalized learning paths.</p>
+        <p class="mb-4">Start with a placement test to unlock tailored levels, each offering interactive units with listening, grammar, and video lessons, followed by quizzes to track your progress and advance.</p>
+        <div class="row gy-2 gx-4 mb-4">
+          <div class="col-sm-6">
+            <p class="mb-0"><i class="fa fa-arrow-right me-2" style="color: #fd7e14;"></i>Personalized Placement Tests</p>
+          </div>
+          <div class="col-sm-6">
+            <p class="mb-0"><i class="fa fa-arrow-right me-2" style="color: #fd7e14;"></i>Interactive Learning Units</p>
+          </div>
+          <div class="col-sm-6">
+            <p class="mb-0"><i class="fa fa-arrow-right me-2" style="color: #fd7e14;"></i>Progress Tracking Quizzes</p>
+          </div>
+          <div class="col-sm-6">
+            <p class="mb-0"><i class="fa fa-arrow-right me-2" style="color: #fd7e14;"></i>Level-Based Advancement</p>
+          </div>
+          <div class="col-sm-6">
+            <p class="mb-0"><i class="fa fa-arrow-right me-2" style="color: #fd7e14;"></i>Engaging Video Content</p>
+          </div>
+          <div class="col-sm-6">
+            <p class="mb-0"><i class="fa fa-arrow-right me-2" style="color: #fd7e14;"></i>Flexible Online Access</p>
+          </div>
+        </div>
+        
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Testimonial Start -->
+<section class="testimonials">
+  <div class="container">
+    <div class="text-center">
+      <h2>What Our Learners Say!</h2>
+      <p>Real feedback from real students</p>
+    </div>
+
+    <div class="testimonial-container">
+      <div class="testimonial-item">
+        <img class="testimonial-img" src="/assets/img/testimonial-1.jpg" alt="Client 1">
+        <h5>John Doe</h5>
+        <p class="profession">Student</p>
+        <p class="testimonial-text">"The courses are excellent and helped me improve my skills significantly. Highly recommended!"</p>
+      </div>
+
+      <div class="testimonial-item">
+        <img class="testimonial-img" src="/assets/img/testimonial-2.jpg" alt="Client 2">
+        <h5>Jane Smith</h5>
+        <p class="profession">Freelancer</p>
+        <p class="testimonial-text">"I loved the interactive lessons! The content is well-structured, and I could learn at my own pace."</p>
+      </div>
+
+      <div class="testimonial-item">
+        <img class="testimonial-img" src="/assets/img/testimonial-3.jpg" alt="Client 3">
+        <h5>Emily Clark</h5>
+        <p class="profession">Student</p>
+        <p class="testimonial-text">"The platform is easy to use, and the learning materials are top-notch. Great experience!"</p>
+      </div>
+
+      <div class="testimonial-item">
+        <img class="testimonial-img" src="/assets/img/testimonial-4.jpg" alt="Client 1">
+        <h5>Sarah Johnson</h5>
+        <p class="profession">Professional</p>
+        <p class="testimonial-text">"The placement test set me on the perfect path, and the interactive units with quizzes made learning English so engaging!"</p>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- Testimonial End -->
+
+
+
+<app-footer></app-footer>

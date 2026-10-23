@@ -1,0 +1,87 @@
+/* footer.component.css (or wherever your footer styles reside) */
+
+/* Import Google Fonts if not already imported globally */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
+
+/* Import Font Awesome if not already imported globally or via angular.json */
+/* @import '~font-awesome/css/font-awesome.css'; */
+/* Note: Importing large libraries directly in component CSS is often less efficient
+   than including them globally via angular.json or index.html */
+
+/* Apply to the host element or the main div inside the footer template */
+:host, /* Or .footer if it's a class inside the template */
+.footer {
+  display: block; /* Ensure it behaves as a block */
+  background: linear-gradient(to right, #9c50ed, #e0b836); /* Matching login gradient */
+  color: #ffffff;
+  font-family: 'Poppins', sans-serif;
+  box-shadow: 0 -4px 10px rgba(0, 0, 0, 0.3); /* Shadow for depth */
+  /* width: 100%; */ /* Width is handled globally now */
+  /* flex-shrink: 0; */ /* Handled globally */
+}
+
+/* Keep the rest of your styles for content, icons etc. */
+#footercontent {
+  padding: 20px;
+  /* background: rgba(255, 255, 255, 0.15); */ /* Glass effect - removed for clarity, add back if needed */
+  /* backdrop-filter: blur(10px); */ /* Glass effect */
+  border-radius: 0;
+  max-width: 1200px; /* Optional: Constrain content width */
+  margin: 0 auto; /* Center content if max-width is set */
+  text-align: center; /* Center text content */
+}
+
+.footer-brand {
+  color: #ffffff;
+  font-weight: 600;
+  font-size: 18px;
+  text-transform: uppercase;
+  margin-bottom: 15px; /* Add some spacing */
+}
+
+/* Social Icons Section */
+.social-icons {
+  display: flex;
+  justify-content: center;
+  align-items: center; /* Vertically align items */
+  flex-wrap: wrap;
+  margin-top: 15px; /* Spacing above icons */
+}
+
+.btn-floating {
+  width: 40px;
+  height: 40px;
+  display: inline-flex; /* Use inline-flex for alignment within the flow */
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+  margin: 5px 8px; /* Adjust spacing */
+  /* background: rgba(255, 255, 255, 0.2); */ /* Removed glass effect for colored buttons */
+  color: #ffffff;
+  border: none;
+  transition: background-color 0.3s, transform 0.2s;
+  text-decoration: none;
+  font-size: 20px; /* Adjusted icon size */
+}
+
+/* Specific icon colors (default states) */
+.btn-floating.fa-facebook-f { background-color: #3b5998; }
+.btn-floating.fa-twitter { background-color: #55acee; }
+.btn-floating.fa-telegram { background-color: #229ED9; } /* Corrected Telegram color */
+.btn-floating.fa-google { background-color: #dd4b39; }
+.btn-floating.fa-linkedin-in { background-color: #0077b5; } /* Corrected LinkedIn icon/color */
+.btn-floating.fa-pinterest { background-color: #BD081C;} /* Corrected Pinterest color */
+.btn-floating.fa-whatsapp { background-color: #25D366; } /* Corrected WhatsApp color */
+.btn-floating.fa-youtube { background-color: #FF0000; } /* Corrected YouTube icon/color */
+.btn-floating.fa-github { background-color: #333333; }
+
+.btn-floating:hover {
+  /* background-color: #ff7e5f; */ /* Orange on hover - Optional, maybe keep original colors? */
+   background-color: rgba(255, 255, 255, 0.3); /* Subtle lighten effect on hover */
+   transform: scale(1.1); /* Slight scale effect */
+}
+
+/* Ensure font awesome icons are centered if needed, often handled by flex alignment */
+/* .fa { */
+/* vertical-align: middle; */
+/* } */

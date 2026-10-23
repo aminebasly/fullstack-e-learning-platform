@@ -1,0 +1,25 @@
+<header *ngIf="isLoggedIn && userDetails; else notLoggedIn">
+  <div class="sidebar-logo">
+    <img src="/assets/img/English-Star.jpg" alt="English Star Logo" class="logo">
+    
+    <div class="user-actions">
+      <button class="logoutbtn" (click)="navigateHome()"><i class="fa fa-home"></i> Home</button>
+      <b class="sidebar-text"><i class="fa fa-user"></i> {{ userDetails.email }}</b>
+      <button class="logoutbtn" (click)="logout()"><i class="fa fa-sign-out"></i> Logout</button>
+    </div>
+    <div *ngIf="errorMessage" class="error-message">{{ errorMessage }}</div>
+  </div>
+</header>
+<ng-template #notLoggedIn>
+  <header>
+    <div class="sidebar-logo">
+      <img src="/assets/img/English-Star.jpg" alt="English Star Logo" class="logo">
+      <div class="welcometxt"><b>Please log in</b></div>
+      <div class="user-actions">
+        <button class="logoutbtn" (click)="navigateToLogin()">
+          <i class="fa fa-sign-in"></i> Login
+        </button>
+      </div>
+    </div>
+  </header>
+</ng-template>

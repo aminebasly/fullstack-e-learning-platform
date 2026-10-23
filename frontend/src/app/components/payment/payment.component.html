@@ -1,0 +1,31 @@
+<div class="page-wrapper">
+  <div class="payment-container">
+    <div class="header">
+      <img src="/assets/img/English-Star.jpg" alt="Logo" class="logo">
+      <span class="brand-name">English Star</span>
+    </div>
+
+    <h2>Choose Your Plan</h2>
+
+    <div class="payment-options">
+      <div class="card">
+        <h3>Full Course Access</h3>
+        <p>Get lifetime access to all levels (A1 to C2).</p>
+        <p class="price">₺12599</p>
+        <button (click)="processPayment('Full')" [disabled]="isLoading">Buy Now</button>
+      </div>
+
+      <div class="card">
+        <h3>Single Level Access</h3>
+        <p>Access a specific level based on your skill evaluation.</p>
+        <p class="price">₺2479</p>
+        <button (click)="processPayment('Single')" [disabled]="isLoading">Buy Now</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+

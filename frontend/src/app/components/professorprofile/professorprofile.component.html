@@ -1,0 +1,124 @@
+<app-header></app-header>
+<div class="container">
+  <!-- Form Container -->
+  <div class="card">
+    <h2 class="text-xl font-semibold mb-4">Professor Profile</h2>
+    
+    <!-- Professor Form -->
+    <form (ngSubmit)="onSubmit()" #professorForm="ngForm">
+      
+      <!-- Professor Name -->
+      <div class="mb-4">
+        <label for="professorname" class="form-label">Professor Name</label>
+        <input 
+          id="professorname" 
+          type="text" 
+          [(ngModel)]="professor.professorname" 
+          name="professorname" 
+          class="form-input" 
+          required 
+        />
+      </div>
+
+      <!-- Degree Completed -->
+      <div class="mb-4">
+        <label for="degreecompleted" class="form-label">Degree Completed</label>
+        <input 
+          id="degreecompleted" 
+          type="text" 
+          [(ngModel)]="professor.degreecompleted" 
+          name="degreecompleted" 
+          class="form-input" 
+          required
+        />
+      </div>
+
+      <!-- Institution Name -->
+      <div class="mb-4">
+        <label for="institutionname" class="form-label">Institution Name</label>
+        <input 
+          id="institutionname" 
+          type="text" 
+          [(ngModel)]="professor.institutionname" 
+          name="institutionname" 
+          class="form-input" 
+          required
+        />
+      </div>
+
+      <!-- Department -->
+      <div class="mb-4">
+        <label for="department" class="form-label">Department</label>
+        <input 
+          id="department" 
+          type="text" 
+          [(ngModel)]="professor.department" 
+          name="department" 
+          class="form-input" 
+          required
+        />
+      </div>
+
+      <!-- Experience -->
+      <div class="mb-4">
+        <label for="experience" class="form-label">Experience</label>
+        <input 
+          id="experience" 
+          type="text" 
+          [(ngModel)]="professor.experience" 
+          name="experience" 
+          class="form-input" 
+          required
+        />
+      </div>
+
+      <!-- Gender -->
+      <div class="mb-4">
+        <label for="gender" class="form-label">Gender</label>
+        <input 
+          id="gender" 
+          type="text" 
+          [(ngModel)]="professor.gender" 
+          name="gender" 
+          class="form-input" 
+          required
+        />
+      </div>
+
+      <!-- Mobile -->
+      <div class="mb-4">
+        <label for="mobile" class="form-label">Mobile</label>
+        <input 
+          id="mobile" 
+          type="text" 
+          [(ngModel)]="professor.mobile" 
+          name="mobile" 
+          class="form-input" 
+          required
+        />
+      </div>
+
+      <!-- Password -->
+      <div class="mb-4">
+        <label for="password" class="form-label">Password</label>
+        <input 
+          id="password" 
+          type="password" 
+          [(ngModel)]="professor.password" 
+          name="password" 
+          class="form-input" 
+          required
+        />
+      </div>
+
+      <!-- Action Buttons -->
+      <div class="d-flex">
+        <button type="submit" class="btn-save">Save</button>
+        <button type="button" (click)="onCancel()" class="btn-cancel">Cancel</button>
+      </div>
+      
+    </form>
+  </div>
+</div>
+
+<app-footer></app-footer>

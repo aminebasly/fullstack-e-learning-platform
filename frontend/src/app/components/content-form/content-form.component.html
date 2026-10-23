@@ -1,0 +1,105 @@
+<app-header></app-header>
+<br>
+<form [formGroup]="contentForm" (ngSubmit)="submitContent()">
+
+  <!-- Content Type -->
+  <label>Content Type</label>
+  <select formControlName="type">
+    <option value="VIDEO">Video</option>
+    <option value="LISTENING">Listening</option>
+    <option value="GRAMMAR">Grammar</option>
+  </select>
+
+  <!-- Upload Section -->
+  <div *ngIf="contentForm.get('type')?.value !== 'GRAMMAR'">
+    <label>Upload MP4/MP3</label>
+    <input type="file" (change)="onFileSelected($event)" accept=".mp4,.mp3" />
+    <mat-progress-spinner *ngIf="uploading" diameter="30" mode="indeterminate"></mat-progress-spinner>
+    <div *ngIf="uploadSuccess">✅ Upload done!</div>
+  </div>
+
+  <!-- Grammar Section -->
+  <div *ngIf="contentForm.get('type')?.value === 'GRAMMAR'">
+    <label>Grammar Explanation</label>
+    <quill-editor formControlName="grammarHtml" [modules]="quillModules"></quill-editor>
+    <label>Optional PDF</label>
+    <input type="file" (change)="onFileSelected($event)" accept=".pdf" />
+<mat-progress-spinner *ngIf="uploading" diameter="30" mode="indeterminate"></mat-progress-spinner>
+    <div *ngIf="uploadSuccess">✅ Upload done!</div>
+
+    <!-- Live Preview -->
+    <h4>Preview</h4>
+    <div class="preview-box" [innerHTML]="contentForm.get('grammarHtml')?.value"></div>
+  </div>
+
+  <!-- Level -->
+  <label>Level</label>
+  <select formControlName="level">
+    <option *ngFor="let lvl of ['A1', 'A2', 'B1', 'B2', 'C1', 'C2']" [value]="lvl">{{ lvl }}</option>
+  </select>
+
+  <!-- Unit and Content Number -->
+  <label>Unit Number</label>
+  <input type="number" formControlName="unitNumber" min="1" max="3" />
+
+  <label>Content Number</label>
+  <input type="number" formControlName="contentNumber" min="1" max="3" />
+
+  <!-- Live Pre-check Feedback -->
+  <div *ngIf="contentForm.valid && contentForm.get('level')?.value && contentForm.get('type')?.value">
+    <span *ngIf="checkingContent" style="color: orange;">⏳ Checking content slot...</span>
+    <span *ngIf="!checkingContent && contentExists" style="color: red;">❌ This content slot is already used.</span>
+    <span *ngIf="!checkingContent && !contentExists" style="color: green;">✅ This content slot is available.</span>
+  </div>
+
+<!-- Questions -->
+<div formArrayName="questions">
+  <h3>Questions</h3>
+  <button type="button" (click)="addQuestion()">+ Add Question</button>
+
+  <div *ngFor="let q of questions.controls; let i = index" [formGroupName]="i">
+    <label>Question</label>
+    <input type="text" formControlName="text" />
+
+    <label>Type</label>
+    <select formControlName="type">
+      <option value="MULTIPLE_CHOICE">Multiple Choice</option>
+      <option value="TRUE_FALSE">True/False</option>
+    </select>
+
+    <!-- Show options ONLY for MULTIPLE_CHOICE -->
+    <div formArrayName="options" *ngIf="q.get('type')?.value === 'MULTIPLE_CHOICE'">
+      <label>Options</label>
+      <div *ngFor="let opt of getOptions(i).controls; let j = index">
+        <input type="text" [formControlName]="j" placeholder="Option {{ j + 1 }}" />
+      </div>
+    </div>
+
+    <label>Correct Option</label>
+    <!-- Numeric input for Multiple Choice -->
+    <input *ngIf="q.get('type')?.value === 'MULTIPLE_CHOICE'"
+           type="number"
+           formControlName="correctOption"
+           [min]="1"
+           [max]="4" />
+
+    <!-- Combo box for True/False -->
+    <select *ngIf="q.get('type')?.value === 'TRUE_FALSE'"
+            formControlName="correctOption">
+      <option [value]="1">True</option>
+      <option [value]="0">False</option>
+    </select>
+
+    <button type="button" (click)="removeQuestion(i)">Remove</button>
+  </div>
+</div>
+
+
+  <!-- Submit -->
+  <button type="submit"
+          [disabled]="contentForm.invalid || uploading || contentExists || isSubmitting">
+    {{ isSubmitting ? 'Submitting...' : 'Submit Content' }}
+  </button>
+
+</form>
+<app-footer></app-footer>

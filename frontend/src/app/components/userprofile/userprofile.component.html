@@ -1,0 +1,205 @@
+<app-header></app-header>
+
+<div class="profile-container">
+  <div class="profile-view" *ngIf="!isEditing && profileDetails">
+    <h2>User Profile</h2>
+    <div class="profile-card">
+      <p><strong>Username:</strong> {{ profileDetails.username }}</p>
+      <p><strong>Profession:</strong> {{ profileDetails.profession || 'Not specified' }}</p>
+      <p><strong>Gender:</strong> {{ profileDetails.gender || 'Not specified' }}</p>
+      <p><strong>Mobile:</strong> {{ profileDetails.mobile || 'Not specified' }}</p>
+      <p><strong>Address:</strong> {{ profileDetails.address || 'Not specified' }}</p>
+      <button class="edit-btn" (click)="editProfile()">Edit Profile</button>
+    </div>
+  </div>
+
+  <div class="profile-view" *ngIf="!isEditing && !profileDetails">
+    <p class="error-message">{{ msg || 'Loading profile...' }}</p>
+  </div>
+
+  <div class="edit-profile" *ngIf="isEditing">
+    <h2>Edit Profile</h2>
+    <form #profileForm="ngForm" (ngSubmit)="updateUserProfile()" class="edit-form">
+      <!-- Username -->
+      <div class="form-group">
+        <label for="username">Username <b class="text-danger">*</b></label>
+        <input
+          type="text"
+          id="username"
+          name="username"
+          [(ngModel)]="userProfile.username"
+          required
+          pattern=".{5,15}"
+          #username="ngModel"
+          [class.is-invalid]="username.invalid && username.touched"
+          class="form-control"
+        />
+        <small class="text-danger" *ngIf="username.invalid && username.touched">
+          <span *ngIf="username.errors?.required">Username is required</span>
+          <span *ngIf="username.errors?.pattern">Username must be between 5 and 10 characters</span>
+        </small>
+      </div>
+
+      <!-- Profession -->
+      <div class="form-group">
+        <label for="profession">Profession <b class="text-danger">*</b></label>
+        <select
+          id="profession"
+          name="profession"
+          [(ngModel)]="userProfile.profession"
+          required
+          #profession="ngModel"
+          [class.is-invalid]="profession.invalid && profession.touched"
+          class="form-control"
+        >
+          <option value="" disabled selected>Select Profession</option>
+          <option value="Student">Student</option>
+          <option value="Engineer">Engineer</option>
+          <option value="Doctor">Doctor</option>
+          <option value="Other">Other</option>
+        </select>
+        <small class="text-danger" *ngIf="profession.invalid && profession.touched">
+          Please select a profession
+        </small>
+      </div>
+
+      <!-- Gender -->
+      <div class="form-group">
+        <label>Gender <b class="text-danger">*</b></label>
+        <div class="d-flex gap-3 mb-3">
+          <div class="form-check">
+            <input
+              class="form-check-input"
+              type="radio"
+              name="gender"
+              id="male"
+              value="Male"
+              [(ngModel)]="userProfile.gender"
+              required
+              #gender="ngModel"
+              [class.is-invalid]="gender.invalid && gender.touched"
+            />
+            <label class="form-check-label" for="male">Male</label>
+          </div>
+          <div class="form-check">
+            <input
+              class="form-check-input"
+              type="radio"
+              name="gender"
+              id="female"
+              value="Female"
+              [(ngModel)]="userProfile.gender"
+              required
+            />
+            <label class="form-check-label" for="female">Female</label>
+          </div>
+        </div>
+        <small class="text-danger" *ngIf="gender.invalid && gender.touched">Please select a gender</small>
+      </div>
+
+      <!-- Mobile -->
+      <div class="form-group">
+        <label for="mobile">Mobile <b class="text-danger">*</b></label>
+        <input
+          type="tel"
+          id="mobile"
+          name="mobile"
+          [(ngModel)]="userProfile.mobile"
+          required
+          minlength="10"
+          maxlength="10"
+          pattern="^[0-9]{10}$"
+          #mobile="ngModel"
+          [class.is-invalid]="mobile.invalid && mobile.touched"
+          class="form-control"
+        />
+        <small class="text-danger" *ngIf="mobile.invalid && mobile.touched">
+          <span *ngIf="mobile.errors?.required">Mobile is required</span>
+          <span *ngIf="mobile.errors?.minlength || mobile.errors?.maxlength || mobile.errors?.pattern">
+            Mobile must be exactly 10 digits
+          </span>
+        </small>
+      </div>
+
+      <!-- Address -->
+      <div class="form-group">
+        <label for="address">Address <b class="text-danger">*</b></label>
+        <input
+          type="text"
+          id="address"
+          name="address"
+          [(ngModel)]="userProfile.address"
+          required
+          #address="ngModel"
+          [class.is-invalid]="address.invalid && address.touched"
+          class="form-control"
+        />
+        <small class="text-danger" *ngIf="address.invalid && address.touched">Address is required</small>
+      </div>
+
+      <!-- Password -->
+      <div class="form-group">
+        <label for="password">Password <b class="text-danger">*</b></label>
+        <div class="password-input-container">
+          <input
+            type="{{ showPassword ? 'text' : 'password' }}"
+            id="password"
+            name="password"
+            [(ngModel)]="userProfile.password"
+            required
+            pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,20}$"
+            #password="ngModel"
+            [class.is-invalid]="password.invalid && password.touched"
+            class="form-control"
+          />
+          <button type="button" class="password-toggle-button" (click)="togglePasswordVisibility()">
+            <i class="fas" [ngClass]="showPassword ? 'fa-eye-slash' : 'fa-eye'"></i>
+          </button>
+        </div>
+        <small class="text-danger" *ngIf="password.invalid && password.touched">
+          <span *ngIf="password.errors?.required">Password is required</span>
+          <span *ngIf="password.errors?.pattern">
+            Password must contain at least one uppercase letter, one lowercase letter, one number, and be between 8 and 20 characters long
+          </span>
+        </small>
+        <small class="hint">At least one uppercase, numeric digit, lowercase, 8-20 characters</small>
+      </div>
+
+      <!-- Confirm Password -->
+      <div class="form-group">
+        <label for="confirmPassword">Confirm Password <b class="text-danger">*</b></label>
+        <div class="password-input-container">
+          <input
+            type="{{ showConfirmPassword ? 'text' : 'password' }}"
+            id="confirmPassword"
+            name="confirmPassword"
+            [(ngModel)]="userProfile.confirmPassword"
+            required
+            #confirmPassword="ngModel"
+            [class.is-invalid]="confirmPassword.invalid && confirmPassword.touched || (confirmPassword.touched && userProfile.password !== userProfile.confirmPassword)"
+            class="form-control"
+          />
+          <button type="button" class="password-toggle-button" (click)="toggleConfirmPasswordVisibility()">
+            <i class="fas" [ngClass]="showConfirmPassword ? 'fa-eye-slash' : 'fa-eye'"></i>
+          </button>
+        </div>
+        <small class="text-danger" *ngIf="confirmPassword.invalid && confirmPassword.touched">
+          <span *ngIf="confirmPassword.errors?.required">Confirm Password is required</span>
+        </small>
+        <small class="text-danger" *ngIf="confirmPassword.touched && userProfile.password !== userProfile.confirmPassword">
+          Passwords do not match
+        </small>
+      </div>
+
+      <!-- Buttons -->
+      <div class="btn-group">
+        <button type="submit" class="save-btn" [disabled]="profileForm.invalid">Save Changes</button>
+        <button type="button" class="cancel-btn" (click)="isEditing = false">Cancel</button>
+      </div>
+    </form>
+
+    <p *ngIf="msg" class="message" [ngClass]="{'success-message': temp, 'error-message': !temp}">{{ msg }}</p>
+  </div>
+</div>
+
+<app-footer></app-footer>

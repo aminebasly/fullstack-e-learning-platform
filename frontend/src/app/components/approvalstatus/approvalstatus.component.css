@@ -1,0 +1,169 @@
+@import url('https://fonts.googleapis.com/css2?family=Mate+SC&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Oswald:wght@600&display=swap');
+
+/* General panel styling */
+.panel-body {
+  margin: 0 2%; /* Consistent margins on both sides */
+  padding: 20px; /* Added padding for better spacing */
+}
+
+/* Table header styling */
+thead {
+  background-color: rgb(85, 14, 14); /* Deep maroon for header */
+  padding: 10px 5px;
+}
+
+/* Table and cell alignment */
+table {
+  width: 100%; /* Ensure table takes full width */
+  border-collapse: collapse; /* Remove gaps between borders */
+  font-family: 'Mate SC', serif; /* Consistent font for table */
+}
+
+td, th {
+  text-align: center;
+  vertical-align: middle;
+  padding: 12px; /* Unified padding for consistency */
+  border: 1px solid rgb(163, 161, 161); /* Light gray border */
+}
+
+/* Table header specifics */
+th {
+  text-transform: uppercase;
+  color: white;
+  font-family: 'Oswald', sans-serif; /* Bold header font */
+  font-style: italic;
+  font-size: 1.1rem; /* Slightly larger for emphasis */
+  background-color: rgb(3, 70, 3); /* Dark green for contrast */
+  border: 1px solid white;
+}
+
+/* Table data specifics */
+td {
+  text-transform: none;
+  font-size: 1rem; /* Standard size for readability */
+  font-weight: bold;
+  color: #333; /* Darker text for contrast */
+}
+
+/* Status badges */
+.accepted {
+  display: inline-block;
+  border: 2px solid rgb(0, 100, 0); /* Darker green border */
+  border-radius: 12px;
+  background-color: rgb(30, 116, 30); /* Green background */
+  padding: 6px 12px;
+  color: white;
+  font-weight: bold;
+  font-size: 0.9rem;
+  text-transform: uppercase;
+}
+
+.pending {
+  display: inline-block;
+  border: 2px solid rgb(150, 100, 0); /* Darker orange border */
+  border-radius: 12px;
+  background-color: rgb(196, 137, 28); /* Orange background */
+  padding: 6px 12px;
+  color: white;
+  font-weight: bold;
+  font-size: 0.9rem;
+  text-transform: uppercase;
+}
+
+.rejected {
+  display: inline-block;
+  border: 2px solid rgb(139, 0, 0); /* Darker red border */
+  border-radius: 12px;
+  background-color: rgb(255, 0, 0); /* Bright red background */
+  padding: 6px 12px;
+  color: white;
+  font-weight: bold;
+  font-size: 0.9rem;
+  text-transform: uppercase;
+}
+
+/* Action buttons */
+.accepted-btn {
+  background-color: rgb(30, 116, 30); /* Matches .accepted */
+  color: white;
+  border: 2px solid rgb(0, 100, 0);
+  border-radius: 8px;
+  padding: 6px 12px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease; /* Smooth hover effects */
+}
+
+.accepted-btn:hover:not(:disabled) {
+  background-color: rgb(50, 150, 50); /* Lighter green on hover */
+  transform: scale(1.05); /* Slight scale-up effect */
+}
+
+.accepted-btn:disabled {
+  background-color: rgb(150, 180, 150); /* Muted green when disabled */
+  cursor: not-allowed;
+  opacity: 0.7;
+}
+
+.rejected-btn {
+  background-color: rgb(255, 0, 0); /* Matches .rejected */
+  color: white;
+  border: 2px solid rgb(139, 0, 0);
+  border-radius: 8px;
+  padding: 6px 12px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.rejected-btn:hover:not(:disabled) {
+  background-color: rgb(255, 50, 50); /* Lighter red on hover */
+  transform: scale(1.05);
+}
+
+.rejected-btn:disabled {
+  background-color: rgb(200, 100, 100); /* Muted red when disabled */
+  cursor: not-allowed;
+  opacity: 0.7;
+}
+
+/* Date/ID badge */
+.date-cover {
+  display: inline-block;
+  border-radius: 10px;
+  background-color: rgb(14, 9, 58); /* Dark blue background */
+  padding: 5px 12px;
+  color: white;
+  font-size: 1rem;
+  font-weight: bold;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  table, td, th {
+    font-size: 0.9rem; /* Smaller text on mobile */
+    padding: 8px; /* Reduced padding */
+  }
+
+  .accepted, .pending, .rejected {
+    font-size: 0.8rem;
+    padding: 4px 8px;
+  }
+
+  .accepted-btn, .rejected-btn {
+    font-size: 0.8rem;
+    padding: 4px 8px;
+  }
+
+  .panel-body {
+    margin: 0 1%; /* Tighter margins on smaller screens */
+    padding: 10px;
+  }
+}
+
+/* Ensure images scale properly */
+.bloodimg {
+  max-width: 100%;
+  height: auto;
+}

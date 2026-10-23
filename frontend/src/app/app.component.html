@@ -1,0 +1,7 @@
+<!-- Loading overlay -->
+<div class="loading-overlay" *ngIf="isLoading">
+  <app-loading></app-loading>
+</div>
+<!-- Main content -->
+<app-upgrade-modal #upgradeModal></app-upgrade-modal>
+<router-outlet></router-outlet>

@@ -1,0 +1,397 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
+@import '~font-awesome/css/font-awesome.css';
+
+/* Sidebar */
+/* Sidebar */
+.sidebar {
+  position: fixed;
+  left: 0;
+  top: 0;
+  height: 100%;
+  width: 78px; /* Collapsed width */
+  background: linear-gradient(to bottom, #9c50ed, #8e2de2); /* Gradient matching professor's theme */
+  padding: 6px 14px;
+  z-index: 99;
+  transition: width 0.5s ease; /* Smooth width transition */
+}
+
+.sidebar.open {
+  width: 250px; /* Expanded width */
+}
+
+/* Logo Details */
+.sidebar .logo-details {
+  height: 60px;
+  display: flex;
+  align-items: center;
+  position: relative;
+}
+
+/* Sidebar Toggle Button */
+.sidebar .logo-details .fa-bars {
+  cursor: pointer;
+  color: #ffffff;
+  font-size: 28px;
+  min-width: 50px;
+  text-align: center;
+  line-height: 60px;
+  transition: opacity 0.3s ease;
+}
+
+.sidebar.open .logo-details .fa-bars {
+  opacity: 0; /* Hide when sidebar is open */
+}
+
+.sidebar:not(.open) .logo-details .fa-bars {
+  opacity: 1; /* Visible when closed */
+}
+
+/* Sidebar Logo and Name */
+.sidebar .logo-details .logo_name {
+  color: #ffffff;
+  font-size: 20px;
+  font-weight: 600;
+  font-family: 'Poppins', sans-serif;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  display: flex;
+  align-items: center;
+}
+
+.sidebar.open .logo-details .logo_name {
+  opacity: 1;
+}
+
+.sidebar .logo-details .main-logo {
+  margin-right: 10px; /* Space between logo and user image/text */
+}
+
+/* Professor Specific Image */
+.sidebar .logo-details .bloodimg {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-right: 10px; /* Space for user image */
+  opacity: 0; /* Hidden by default */
+  transition: opacity 0.3s ease;
+}
+
+.sidebar.open .logo-details .bloodimg {
+  opacity: 1; /* Visible when sidebar is expanded */
+}
+
+/* Navigation List */
+.sidebar .nav-list {
+  margin-top: 20px;
+  padding-left: 0;
+}
+
+.sidebar li {
+  position: relative;
+  margin: 8px 0;
+  list-style: none;
+}
+
+.sidebar li a {
+  display: flex;
+  height: 50px;
+  width: 100%;
+  border-radius: 12px;
+  align-items: center;
+  text-decoration: none;
+  transition: background 0.4s ease;
+  background: rgba(255, 255, 255, 0.15); /* Glass effect */
+  backdrop-filter: blur(5px);
+}
+
+.sidebar li a:hover {
+  background: #ff7e5f; /* Orange hover */
+}
+
+.sidebar li a .links_name {
+  color: #ffffff;
+  font-size: 15px;
+  font-weight: 400;
+  font-family: 'Poppins', sans-serif;
+  white-space: nowrap;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.sidebar.open li a .links_name {
+  opacity: 1;
+}
+
+.sidebar li a:hover .links_name,
+.sidebar li a:hover i {
+  color: #ffffff;
+}
+
+.sidebar li i {
+  color: #ffffff;
+  height: 50px;
+  min-width: 50px;
+  font-size: 18px;
+  text-align: center;
+  line-height: 50px;
+}
+
+/* Tooltip */
+.sidebar li .tooltip {
+  position: absolute;
+  top: 50%;
+  left: calc(100% + 15px);
+  transform: translateY(-50%);
+  background: #ffffff;
+  color: #333;
+  padding: 6px 12px;
+  border-radius: 4px;
+  font-size: 15px;
+  font-family: 'Poppins', sans-serif;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+}
+
+.sidebar li:hover .tooltip {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.sidebar.open li .tooltip {
+  display: none;
+}
+
+/* Home Section */
+.home-section {
+  position: relative;
+  background: linear-gradient(to right, #f5f5f5, #ffffff);
+  min-height: 90vh;
+  left: 78px;
+  width: calc(100% - 78px);
+  transition: all 0.5s ease;
+  padding: 40px 20px;
+  box-sizing: border-box;
+}
+
+.headtxt {
+  color: #6a0dad; /* Slightly darker purple */
+  font-weight: 700;
+  font-family: 'Poppins', sans-serif;
+  font-size: 42px;
+  margin-bottom: 40px;
+  text-align: center;
+}
+
+/* Grid layout for cards */
+.dashboard-grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+/* Dashboard Cards */
+.dashboard-card {
+  background: rgba(255, 255, 255, 0.95);
+  border-radius: 15px;
+  flex: 1 1 30%;
+  min-width: 250px;
+  padding: 25px 20px;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+  transition: transform 0.3s, box-shadow 0.3s, background 0.3s;
+  position: relative;
+  overflow: hidden;
+}
+
+.dashboard-card:hover {
+  transform: translateY(-5px) scale(1.03);
+  box-shadow: 0 15px 30px rgba(0,0,0,0.25);
+  background: #feb47b;
+  color: #fff;
+}
+
+/* Circles for icons with different colors */
+.circle {
+  border-radius: 50%;
+  width: 80px;
+  height: 80px;
+  float: right;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 15px;
+  transition: all 0.3s;
+}
+
+.circle.learners { background: #6a0dad; }      /* Purple */
+.circle.professors { background: #ff7e5f; }   /* Orange */
+.circle.completed { background: #28a745; }    /* Green */
+
+#icons {
+  font-size: 2.5em;
+  color: #fff;
+}
+
+/* Card text */
+.text {
+  font-family: 'Poppins', sans-serif;
+  font-size: 28px;
+  font-weight: 600;
+  margin-bottom: 10px;
+  color: #333;
+}
+
+.sub-text {
+  font-family: 'Poppins', sans-serif;
+  font-size: 16px;
+  color: #555;
+}
+
+/* Responsive adjustments */
+@media (max-width: 1024px) {
+  .dashboard-card { flex: 1 1 45%; }
+}
+
+@media (max-width: 768px) {
+  .dashboard-card { flex: 1 1 100%; }
+}
+
+
+/* Pie Chart Card Container */
+.pie-chart-card {
+  background: linear-gradient(135deg, #ffffff 0%, #f8faff 100%);
+  border-radius: 18px;
+  padding: 25px;
+  box-shadow: 0 10px 30px rgba(106, 13, 173, 0.12);
+  border: 1px solid rgba(106, 13, 173, 0.1);
+  transition: all 0.3s ease;
+  margin-top: 30px;
+  position: relative;
+  overflow: hidden;
+}
+
+.pie-chart-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(to right, #9c50ed, #ff7e5f);
+  border-radius: 18px 18px 0 0;
+}
+
+.pie-chart-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 15px 35px rgba(106, 13, 173, 0.2);
+}
+
+/* Chart Title */
+.chart-title {
+  font-family: 'Poppins', sans-serif;
+  font-size: 20px;
+  font-weight: 600;
+  color: #6a0dad;
+  text-align: center;
+  margin-bottom: 20px;
+  position: relative;
+  padding-bottom: 12px;
+}
+
+.chart-title::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 50px;
+  height: 3px;
+  background: linear-gradient(to right, #9c50ed, #ff7e5f);
+  border-radius: 3px;
+}
+
+/* Chart Container */
+.chart-container {
+  width: 100%;
+  max-width: 500px;
+  height: 320px;
+  margin: 0 auto;
+  background: #ffffff;
+  border-radius: 12px;
+  padding: 15px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Canvas Styling */
+.chart-container canvas {
+  max-width: 100%;
+  max-height: 100%;
+}
+
+/* Responsive adjustments */
+@media (max-width: 1024px) {
+  .pie-chart-card {
+    flex: 1 1 100%;
+    margin-top: 20px;
+  }
+  
+  .chart-container {
+    height: 280px;
+  }
+}
+
+@media (max-width: 768px) {
+  .chart-title {
+    font-size: 18px;
+  }
+  
+  .chart-container {
+    height: 250px;
+    padding: 10px;
+  }
+}
+
+@media (max-width: 480px) {
+  .pie-chart-card {
+    padding: 20px 15px;
+  }
+  
+  .chart-container {
+    height: 220px;
+  }
+  
+  .chart-title {
+    font-size: 16px;
+    margin-bottom: 15px;
+  }
+}
+
+/* Legend customization for Chart.js */
+.chart-container ::ng-deep .chart-legend {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-top: 15px;
+  font-family: 'Poppins', sans-serif;
+}
+
+.chart-container ::ng-deep .chart-legend li {
+  display: flex;
+  align-items: center;
+  margin: 5px 10px;
+  font-size: 14px;
+}
+
+.chart-container ::ng-deep .chart-legend span {
+  display: inline-block;
+  width: 12px;
+  height: 12px;
+  margin-right: 5px;
+  border-radius: 50%;
+}
